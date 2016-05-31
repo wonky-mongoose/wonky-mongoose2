@@ -31,4 +31,4 @@
   # push to current branch
   ps = push origin HEAD 
   # pull from current branch
-  pl = pull origin HEAD
+  pl = pull origin
