@@ -29,5 +29,6 @@
   # pull from dev branch
   rb = pull --rebase upstream develop
   # push to current branch
-  po = push origin HEAD 
-
+  ps = push origin HEAD 
+  # pull from current branch
+  pl = pull origin HEAD
