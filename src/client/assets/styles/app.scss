@@ -3,8 +3,44 @@
 @import "app/progress-bar";
 @import "app/flash-card";
 @import "app/splash";
+@import "app/canvas";
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
 html {
   font-family: Montserrat, Avenir, sans-serif;
 }
+
+.no-side-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+div.message > div.profilepic > img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+div.message > div.text-wrapper {
+	border-radius: 2px;
+	font-weight: 300;
+	position: relative;
+	
+    
+    &:before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+ }
+
+div.message > div.profilepic {
+  width: 50px;
+}
+
+div.row > div.inputfield {
+  margin-top: 20px;
+}
+
+
