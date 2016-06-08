@@ -4,6 +4,7 @@ import { Router } from 'express';
 import decks from '../controllers/Decks';
 import plays from '../controllers/Plays';
 import auth from '../controllers/Auth';
+import twilio fromt '../controllers/Twilio';
 
 const router = new Router();
 
@@ -28,5 +29,10 @@ router.route('/api/auth/sign-in').post(auth.signIn);
 router.route('/api/auth/verify').get(auth.verify);
 router.route('/api/auth/sign-out').get(auth.signOut);
 router.route('/api/auth/check-authorized').get(auth.checkAuthorized);
+
+/*
+ * Twilio
+ */
+router.route('/api/token').get(auth.checkAuthServer, )
 
 export default router;
