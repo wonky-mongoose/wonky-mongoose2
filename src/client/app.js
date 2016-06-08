@@ -29,6 +29,8 @@ import Auth from './services/AuthService';
 // application configuration
 import { DEBUG } from './config';
 
+// import startChat from './chat';
+
 reducers.routing = routerReducer;
 
 const store = createStore(combineReducers(reducers), applyMiddleware(thunk));
@@ -45,6 +47,8 @@ const isAuthorized = (nextState, replace, next) => {
       }
     });
 };
+
+// startChat(store);
 
 render(
   <Provider store={store}>
