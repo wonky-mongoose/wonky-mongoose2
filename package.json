@@ -60,9 +60,11 @@
     "connect-mongo": "^1.2.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.7.1",
+    "es6-promise": "^3.2.1",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "install": "^0.8.1",
+    "isomorphic-fetch": "^2.2.1",
     "jquery": "^2.2.4",
     "lodash": "^4.13.1",
     "moment": "^2.13.0",
@@ -78,7 +80,8 @@
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "snpm": "^0.1.1",
-    "socket.io": "^1.4.6"
+    "socket.io": "^1.4.6",
+    "twilio": "^2.9.1"
   },
   "nyc": {
     "include": [

@@ -3,8 +3,14 @@
 @import "app/progress-bar";
 @import "app/flash-card";
 @import "app/splash";
+@import "app/canvas";
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
 html {
   font-family: Montserrat, Avenir, sans-serif;
+}
+
+.no-side-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
