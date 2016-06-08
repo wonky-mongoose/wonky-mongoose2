@@ -30,7 +30,7 @@ class DeckItem extends Component {
 
   chooseDeckToStudy() {
     this.props.setDeckState(this.props.deck);
-    browserHistory.push(`/decks/${this.props.deck._id}/study`);
+    browserHistory.push(`/flash/decks/${this.props.deck._id}/study`);
   }
 
   render() {

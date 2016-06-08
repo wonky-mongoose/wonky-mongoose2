@@ -29,7 +29,7 @@ class StudyDeck extends React.Component {
     return (
       <div className="flashcard flashcard-front">
         <div className="flashcard-close">
-          <i className="material-icons" onClick={() => browserHistory.push('/dashboard')}>close</i>
+          <i className="material-icons" onClick={() => browserHistory.push('/flash/dashboard')}>close</i>
         </div>
         <div className="flashcard-title">
           <ReactMarkdown source={(question && question.text) || ''} />
@@ -49,7 +49,7 @@ class StudyDeck extends React.Component {
     return (
       <div className="flashcard flashcard-back">
         <div className="flashcard-close">
-          <i className="material-icons" onClick={() => browserHistory.push('/dashboard')}>close</i>
+          <i className="material-icons" onClick={() => browserHistory.push('/flash/dashboard')}>close</i>
         </div>
         <div className="flashcard-title">
           <ReactMarkdown source={(answer && answer.text) || ''} />

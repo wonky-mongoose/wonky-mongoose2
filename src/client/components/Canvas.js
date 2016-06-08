@@ -24,7 +24,8 @@ export default class Canvas extends React.Component {
     }
     paper.project.view.onMouseMove = function(e) {
       if(down) {
-        path.rgb = rgb;
+        // path.rgb = rgb;
+        path.strokeColor = 'black';
         path.add(e.point);
         path.smooth();
       }

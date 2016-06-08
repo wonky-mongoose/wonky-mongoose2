@@ -9,7 +9,7 @@ class LogoutView extends React.Component {
   }
 
   componentDidMount() {
-    browserHistory.push('/');
+    browserHistory.push('/sign-in');
   }
 
   render() {
