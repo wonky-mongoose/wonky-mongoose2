@@ -17,8 +17,11 @@ const port = process.env.PORT || 3000;
 setupPassport();
 
 let app = express();
+
+//socket io
 let server = require('http').Server(app);
 let io = require('socket.io')(server);
+const connections = [];
 
 app
   .use(cors({
@@ -45,10 +48,20 @@ app
   
 server.listen(port);
 
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
+io.on('connection', socket => {
+  console.log('connected to socket.io');
+  connections.push(socket);
+  socket.on('message', data => {
+    connections.forEach(connectedSocket => {
+      if (connectedSocket !== socket) {
+        connectedSocket.emit('message', data);
+      }
+    });
+  });
+
+  socket.on('disconnect', () => {
+    const index = connections.indexOf(socket);
+    connections.splice(index, 1);
   });
 });
 
