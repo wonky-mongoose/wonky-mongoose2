@@ -72,3 +72,12 @@ export const savePlay = (play, rating) => {
     .catch(err => dispatch(failedRequest(err)))
   );
 };
+
+// export const receiveDecks = decks => ({ type: types.RECEIVE_DECKS, data: decks });
+ 
+// export const updateMessage = message => ({ type: UPDATE_MESSAGE, data: message });
+ 
+// export const addMessage = () => ({ type: ADD_MESSAGE, data: message });
+
+// export const addResponse = message => ({ type: ADD_RESPONSE, data: message });
+

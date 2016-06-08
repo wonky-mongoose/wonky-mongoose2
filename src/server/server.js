@@ -16,7 +16,14 @@ const port = process.env.PORT || 3000;
 
 setupPassport();
 
-express()
+let app = express();
+
+//socket io
+let server = require('http').Server(app);
+let io = require('socket.io')(server);
+const connections = [];
+
+app
   .use(cors({
     origin: '*',
     methods: ['GET, POST, OPTIONS'],
@@ -37,8 +44,33 @@ express()
   .use(passport.initialize())
   .use(passport.session())
   .use(apiRoute)
-  .use(homeRoute)
-  .listen(port);
+  .use(homeRoute);
+  
+server.listen(port);
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+  });
+});
+
+// io.on('connection', socket => {
+//   console.log('connected to socket.io');
+//   connections.push(socket);
+//   socket.on('message', data => {
+//     connections.forEach(connectedSocket => {
+//       if (connectedSocket !== socket) {
+//         connectedSocket.emit('message', data);
+//       }
+//     });
+//   });
+
+//   socket.on('disconnect', () => {
+//     const index = connections.indexOf(socket);
+//     connections.splice(index, 1);
+//   });
+// });
 
 process
   .stdout
