@@ -1,5 +1,6 @@
 import React from 'react';
 import paper, { Path, PaperScope, Color} from 'paper';
+import { throttle } from 'underscore';
 //require("expose?paper!paper");
 export default class Canvas extends React.Component {
   constructor(props) {
@@ -9,27 +10,32 @@ export default class Canvas extends React.Component {
   componentDidMount() {
     var myCanvas = document.getElementById('myCanvas');
     paper.setup(myCanvas);
-    //console.log(Tool);
     var width = paper.view.size.width;
     var height = paper.view.size.height;
     var path = new Path();
-    let rgb = new Color(100,100,100,100);
     let down = false;
-    paper.project.view.onMouseDown = function(e) {
+
+    var updatePath = throttle((e) => {
+      path.strokeColor = 'black';
+      //path.smooth();
+      path.add(e.point);
+      
+    }, 25);
+    paper.project.view.onMouseDown = (e) => {
       down = true;
     }
-    paper.project.view.onMouseUp = function(e) {
+    paper.project.view.onMouseUp = (e) => {
       down = false;
       path = new Path();
     }
-    paper.project.view.onMouseMove = function(e) {
+    paper.project.view.onMouseMove = (e) => {
       if(down) {
-        path.rgb = rgb;
-        path.add(e.point);
-        path.smooth();
+        updatePath(e);
       }
     }
   }
+
+
 
 
   render() {
