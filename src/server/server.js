@@ -48,22 +48,29 @@ app
   
 server.listen(port);
 
-io.on('connection', socket => {
-  console.log('connected to socket.io');
-  connections.push(socket);
-  socket.on('message', data => {
-    connections.forEach(connectedSocket => {
-      if (connectedSocket !== socket) {
-        connectedSocket.emit('message', data);
-      }
-    });
-  });
-
-  socket.on('disconnect', () => {
-    const index = connections.indexOf(socket);
-    connections.splice(index, 1);
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
   });
 });
+
+// io.on('connection', socket => {
+//   console.log('connected to socket.io');
+//   connections.push(socket);
+//   socket.on('message', data => {
+//     connections.forEach(connectedSocket => {
+//       if (connectedSocket !== socket) {
+//         connectedSocket.emit('message', data);
+//       }
+//     });
+//   });
+
+//   socket.on('disconnect', () => {
+//     const index = connections.indexOf(socket);
+//     connections.splice(index, 1);
+//   });
+// });
 
 process
   .stdout
