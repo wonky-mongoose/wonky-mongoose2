@@ -5,6 +5,7 @@ import decks from '../controllers/Decks';
 import plays from '../controllers/Plays';
 import auth from '../controllers/Auth';
 import twilio from '../controllers/Twilio';
+import AllUsers from '../controllers/AllUsers';
 
 const router = new Router();
 
@@ -30,9 +31,10 @@ router.route('/api/auth/verify').get(auth.verify);
 router.route('/api/auth/sign-out').get(auth.signOut);
 router.route('/api/auth/check-authorized').get(auth.checkAuthorized);
 
+router.route('/api/allusers').get(AllUsers.get);
 /*
  * Twilio
  */
-router.route('/api/token').get(auth.checkAuthServer, )
+router.route('/api/token').get(auth.checkAuthServer, twilio.getToken);
 
 export default router;

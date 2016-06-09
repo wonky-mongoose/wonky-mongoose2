@@ -17,7 +17,6 @@ import App from './components/App';
 import Menu from './components/Menu';
 import Splash from './components/Splash';
 import Classroom from './components/Classroom';
-import Webcam from './components/Webcam';
 import CreateAccount from './components/CreateAccount';
 import SignIn from './containers/SignIn';
 import SignOut from './containers/SignOut';
@@ -26,6 +25,7 @@ import Dashboard from './containers/Dashboard';
 import StudyDeck from './containers/StudyDeck';
 import Canvas from './components/Canvas';
 import MessageApp from './containers/MessageApp';
+import Room from './components/Room';
 import { verifyAuthentication, fetchDecks } from './actions';
 
 // services
@@ -66,7 +66,7 @@ render(
 
         <Route path="/classroom" component={Classroom} onEnter={isAuthorized} />
 
-        <Route path="/classroom/room/:id" component={MessageApp} onEnter={isAuthorized} />
+        <Route path="/classroom/room/:id" component={Room} onEnter={isAuthorized} />
 
         <Route path="/message" component={MessageApp} onEnter={isAuthorized} />
 
@@ -83,6 +83,7 @@ render(
 );
 
 if (DEBUG) {
+  /* eslint-disable-next-line no-console */
   store.subscribe(() => console.log(store.getState()));
 }
 

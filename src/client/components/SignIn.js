@@ -1,3 +1,4 @@
+/* global Materialize */
 import React from 'react';
 import { browserHistory } from 'react-router';
 import Auth from '../services/AuthService';

@@ -25,6 +25,9 @@ npm-debug.log
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
+# Ignore env file for Twilio configuration
+.env
+
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
 dist/
@@ -38,3 +41,5 @@ bower_components/
 
 # Local aliases
 .gitaliases
+src/client/components/Message.js
+src/client/components/MessageList.js
