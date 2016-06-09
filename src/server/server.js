@@ -16,19 +16,12 @@ const port = process.env.PORT || 3000;
 
 setupPassport();
 
-const app = express();
+let app = express();
 
-<<<<<<< HEAD
-// socket io
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
-=======
 //socket io
 let server = require('http').Server(app);
 let io = require('socket.io')(server);
 //app.io = io;
-const connections = [];
->>>>>>> c232c265f7bdf07a96f5ec70f773b1aee5f904cc
 
 app
   .use(cors({
@@ -54,10 +47,9 @@ app
   .use(homeRoute);
   
 server.listen(port);
-io.on('connection', function(socket) {
+
+io.on('connection', function(socket){
   console.log('a user connected');
-  socket.on('chat message', function(msg) {
-    io.emit('chat message', msg);
   socket.emit('connect');
   socket.on('updatePath', function(point){
     io.emit('updatePath', point);
@@ -67,6 +59,12 @@ io.on('connection', function(socket) {
    io.emit('chat message', msg);
  });
 });
+
+
+// io.on('updatePath', function(point){
+//   console.log('updating path');
+//   io.emit('updatePath', point);
+// });
 
 process
   .stdout
