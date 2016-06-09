@@ -30,8 +30,8 @@ export default class Canvas extends React.Component {
 
   componentDidMount() {
     var myCanvas = document.getElementById('myCanvas');
-    myCanvas.width = 900;
-    myCanvas.height = 400;
+    // myCanvas.width = 900;
+    // myCanvas.height = 400;
     paper.setup(myCanvas);
     this.path = new Path();
 
