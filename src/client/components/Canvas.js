@@ -54,9 +54,6 @@ export default class Canvas extends React.Component {
     paper.view.draw();
   }
 
-
-
-
   render() {
     return (
       <div>
