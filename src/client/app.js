@@ -65,9 +65,14 @@ render(
         <Route path="/flash/decks/:deckId/study" component={StudyDeck} onEnter={isAuthorized} />
 
         <Route path="/classroom" component={Classroom} onEnter={isAuthorized} />
+<<<<<<< HEAD
         <Route path="/classroom/room/:id" component={MessageApp} onEnter={isAuthorized} />
 
         <Route path="/message" component={MessageApp} onEnter={isAuthorized} />
+=======
+        <Route path="/classroom/room/:id" component={Webcam} onEnter={isAuthorized} />
+
+>>>>>>> 19071cc134556c31cb92c0e605b97d1780408825
 
         <Route path="/create-account" component={CreateAccount} />
         <Route path="/sign-in" component={SignIn} />
