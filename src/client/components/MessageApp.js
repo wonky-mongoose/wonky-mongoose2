@@ -66,28 +66,28 @@ export default class MessageApp extends React.Component {
   return (
   <div className="container">
     <h4 className="center grey-text text-darken-4">M E S S A G E</h4>
-
-    <div className="card">
+    <div className="row">
+    <div className="card col s12 m4 l4">
       <nav>
         <div className="nav-wrapper cyan">
-        <a href="#" className="brand-logo"></a>
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
+          <ul className="right hide-on-med-and-down">
             <li><a href="badges.html"><i className="material-icons">chat</i></a></li>
-		    <li><a href="badges.html"><i className="material-icons">contacts</i></a></li>      
-	      </ul>
+            <li><a href="badges.html"><i className="material-icons">contacts</i></a></li>      
+        </ul>
         </div>
       </nav>
       <div className="card-content grey lighten-4">
         <div className='row'>
-          <div className='message col s12'>
-            <div className='profilepic col s1'><img src='http://bit.ly/1PgOA2n'/></div>
-            <div className='username'><strong>Sean</strong></div>
-            <div className='col s11 text-wrapper'>This is a link</div>
+          <div className='message col s12 m12 l12'>
+            <div className='profilepic col s3 m3 l3'><img src='http://bit.ly/1PgOA2n'/></div>
+            <div className='username col s9 m9 l9'><strong>Sean</strong></div>
+            <div className='triangle'></div>
+            <div className='card-panel cyan darken-3 col s11 m11 l11'>Say something</div>
           </div>
            <div className='message col s12'>
             <div className='profilepic col s1'><img src='http://bit.ly/1Y7VttI'/></div>
             <div className='username'><strong>Alex</strong></div>
-            <div className='col s11 text-wrapper'>This is a link</div>
+            <div className='col s11 m11 l11 card-panel'><span>This is a link</span></div>
           </div>
            <div className='message col s12'>
             <div className='profilepic col s1'><img src='http://bit.ly/1OcG0XA'/></div>
@@ -101,13 +101,13 @@ export default class MessageApp extends React.Component {
           </div>
 
           {this.state.messages.map((message) => {
-          	return (
-          	  <div className='message col s12'>
+            return (
+              <div className='message col s12'>
                 <div className='profilepic col s1'><img src='http://bit.ly/1PgP9cx'/></div>
                 <div className='username'><strong>{message.user}</strong></div>
                 <div className='col s11 text-wrapper'>{message.text}</div>
               </div>
-          	)
+            )
           })}
 
           <div className='message inputfield col s12'>
@@ -120,6 +120,7 @@ export default class MessageApp extends React.Component {
         </div>
       </div>
     </div>
+    </div>
   </div>
 
   )
@@ -130,3 +131,6 @@ export default class MessageApp extends React.Component {
 MessageApp.propTypes = {
   user: PropTypes.object
 }
+          // <ul className="left hide-on-med-and-down">
+          //   <li><div className='profilepic'><img src='http://bit.ly/1PgOA2n'/></div></li>
+          // </ul>
