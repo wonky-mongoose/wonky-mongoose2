@@ -15,12 +15,6 @@ import {
   BACK,
 } from '../constants/play';
 
-import {
-  UPDATE_MESSAGE, 
-  ADD_MESSAGE, 
-  ADD_RESPONSE
-} from '../constants/actionTypes';
-
 export const decks = (state, action) => {
   switch (action.type) {
     case RECEIVE_DECKS: {
@@ -103,17 +97,3 @@ export const error = (state, action) => {
       return state || {};
   }
 };
-
-export const message = (state, action) => {
-  switch(action.type) {
-    case UPDATE_MESSAGE: {
-      return action.message || state; 
-    }
-    case ADD_MESSAGE: {
-      return '';
-    }
-    default: {
-      return state;
-    }
-  }
-}
