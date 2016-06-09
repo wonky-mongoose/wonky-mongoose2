@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
-class ConversationContainer extends React.Component {
+class ConversationContainer extends Component {
 
 
   componentDidMount() {
     const conversation = this.props.conversation;
-    conversation.localMedia.attach(this.refs.localMedia);
 
     conversation.on('participantConnected', participant => {
       participant.media.attach(this.refs.remoteMedia);
@@ -20,12 +19,16 @@ class ConversationContainer extends React.Component {
 
   render() {
     return (
-      <div id="webcam-displays">
-        {!this.props.isOwner ? <div ref='remoteMedia' className='media-container remote-webcam'></div> : null}
-        {this.props.isOwner ? <div ref='localMedia' className='media-container local-webcam'></div>: null}
-      </div>  
+      <div id="webcam-displays col s12">
+        {!this.props.isOwner ? <div ref="remoteMedia" className="media-container remote-webcam col s12"></div> : null}
+      </div>
     );
   }
 }
+
+ConversationContainer.propTypes = {
+  conversation: PropTypes.object.isRequired,
+  isOwner: PropTypes.bool.isRequired,
+};
 
 export default ConversationContainer;

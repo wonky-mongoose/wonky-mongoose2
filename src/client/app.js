@@ -17,7 +17,6 @@ import App from './components/App';
 import Menu from './components/Menu';
 import Splash from './components/Splash';
 import Classroom from './components/Classroom';
-import Webcam from './components/Webcam';
 import CreateAccount from './components/CreateAccount';
 import SignIn from './containers/SignIn';
 import SignOut from './containers/SignOut';
@@ -84,6 +83,7 @@ render(
 );
 
 if (DEBUG) {
+  /* eslint-disable-next-line no-console */
   store.subscribe(() => console.log(store.getState()));
 }
 
