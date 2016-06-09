@@ -1,12 +1,12 @@
-# Memowise 
+# TIL (previously Memowise) 
 
-[Memowise](http://memowise.xyz/) is an awesome flash card app!
+[TIL](http://memowise.xyz/) is an awesome live whiteboard sharing app!
 
 ## Team
 
-- __Product Owner__: Alex Wong
-- __Scrum Master__: Matt Vargeson
-- __Development Team Members__: Peter Chim, David Valles
+- __Product Owner__: Alexander Lee
+- __Scrum Master__: Lynn Chen
+- __Development Team Members__: Sean Ho, Christopher Choi
 
 ## Table of Contents
 
