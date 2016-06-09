@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* global Twilio */
 import React, { Component, PropTypes } from 'react';
 import ConversationContainer from './ConversationContainer.js';
 import fetch from 'isomorphic-fetch';
@@ -5,7 +7,6 @@ import fetch from 'isomorphic-fetch';
 class Webcam extends Component {
   constructor(props) {
     super(props);
-    console.log('this', this.context);
     const ownedID = this.props.location.pathname.split('/');
     this.state = {
       ownerID: `${ownedID[ownedID.length - 1]}0`,
@@ -101,7 +102,7 @@ class Webcam extends Component {
   }
 
   handleInvite() {
-    const inviteTo = document.getElementById('invite-to').value;
+    const inviteTo = this.state.ownerID;
 
     if (this.state.activeConversation) {
       this.state.activeConversation.invite(inviteTo);
@@ -133,41 +134,47 @@ class Webcam extends Component {
   }
 
   render() {
+    const isOwner = (this.state.ownerID === this.state.identity);
     return (
       <div className="container">
         <div className="row">
           <div className="col s7">
-            <input
-              type="button"
-              id="button-preview"
-              value="WebCam Preview"
-              className="hvr-back-pulse"
-              onClick={this.handlePreview}
-            />
-            <br />
+            {(() => {
+              switch (isOwner) {
+                case true:
+                  return (
+                    <div>
+                      <input
+                        type="button"
+                        id="button-preview"
+                        value="WebCam Preview"
+                        className="waves-effect waves-light btn"
+                        onClick={this.handlePreview}
+                      />
+                      <div id="local-media"></div>
+                    </div>
+                  );
+                case false:
+                  return (
+                    <input
+                      type="button"
+                      id="button-invite"
+                      className="waves-effect waves-light btn"
+                      onClick={this.handleInvite}
+                      value="Join Broadcast"
+                    />
+                  );
+                default:
+                  return null;
+              }
+            })()}
 
-            <input
-              id="invite-to"
-              type="text"
-              value={this.state.ownerID}
-              placeholder="Identity to send an invite to"
-            />
-            <input
-              type="button"
-              id="button-invite"
-              className="hvr-back-pulse"
-              onClick={this.handleInvite}
-              value="Invite"
-            />
-
-            <p id="your-username">{this.state.identity}</p>
-            <div id="local-media" className="local-webcam"></div>
             {(() => {
               switch (this.state.renderConvoContainer) {
                 case true:
                   return (
                     <ConversationContainer
-                      isOwner={this.state.ownerID === this.state.identity}
+                      isOwner={isOwner}
                       conversation={this.state.activeConversation}
                     />
                   );

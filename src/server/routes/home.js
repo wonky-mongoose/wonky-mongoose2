@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { join } from 'path';
 import indexView from '../views';
 
 const router = new Router();
