@@ -33,6 +33,6 @@ router.route('/api/auth/check-authorized').get(auth.checkAuthorized);
 /*
  * Twilio
  */
-router.route('/api/token').get(auth.checkAuthServer, twilio.getToken)
+router.route('/api/token').get(auth.checkAuthServer, twilio.getToken);
 
 export default router;
