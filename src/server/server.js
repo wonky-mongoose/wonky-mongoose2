@@ -18,9 +18,17 @@ setupPassport();
 
 const app = express();
 
+<<<<<<< HEAD
 // socket io
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
+=======
+//socket io
+let server = require('http').Server(app);
+let io = require('socket.io')(server);
+//app.io = io;
+const connections = [];
+>>>>>>> c232c265f7bdf07a96f5ec70f773b1aee5f904cc
 
 app
   .use(cors({
@@ -50,7 +58,14 @@ io.on('connection', function(socket) {
   console.log('a user connected');
   socket.on('chat message', function(msg) {
     io.emit('chat message', msg);
+  socket.emit('connect');
+  socket.on('updatePath', function(point){
+    io.emit('updatePath', point);
   });
+  socket.on('chat message', function(msg){
+   console.log('msg', msg)
+   io.emit('chat message', msg);
+ });
 });
 
 process

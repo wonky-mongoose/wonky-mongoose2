@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-
+import io from 'socket.io-client';
 // let messages = {
 //   sean: {
 //   	user: 'Sean',
@@ -32,8 +32,8 @@ export default class MessageApp extends React.Component {
 
   constructor(props) {
   	super(props);
-
-  	socket.on('chat message', this.recieveMessage.bind(this));
+    this.socket = io.connect('http://localhost:3000');
+  	this.socket.on('chat message', this.recieveMessage.bind(this));
 
   	this.state = {
   	  messages: []
@@ -54,7 +54,7 @@ export default class MessageApp extends React.Component {
 
   sendMessage(e) {
  	if ( this.refs.inputfield.value !== '' ) {
-	  socket.emit('chat message', {user: this.props.user.name, text: this.refs.inputfield.value});
+	  this.socket.emit('chat message', {user: this.props.user.name, text: this.refs.inputfield.value});
 	  this.refs.inputfield.value = '';
  	}
 	e.preventDefault(); 		
