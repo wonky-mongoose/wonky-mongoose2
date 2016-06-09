@@ -16,12 +16,11 @@ const port = process.env.PORT || 3000;
 
 setupPassport();
 
-let app = express();
+const app = express();
 
-//socket io
-let server = require('http').Server(app);
-let io = require('socket.io')(server);
-const connections = [];
+// socket io
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
 app
   .use(cors({
@@ -47,10 +46,9 @@ app
   .use(homeRoute);
   
 server.listen(port);
-
-io.on('connection', function(socket){
+io.on('connection', function(socket) {
   console.log('a user connected');
-  socket.on('chat message', function(msg){
+  socket.on('chat message', function(msg) {
     io.emit('chat message', msg);
   });
 });
