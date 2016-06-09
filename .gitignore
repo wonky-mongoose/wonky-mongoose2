@@ -41,3 +41,5 @@ bower_components/
 
 # Local aliases
 .gitaliases
+src/client/components/Message.js
+src/client/components/MessageList.js

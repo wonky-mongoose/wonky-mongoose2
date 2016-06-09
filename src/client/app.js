@@ -26,6 +26,7 @@ import Dashboard from './containers/Dashboard';
 import StudyDeck from './containers/StudyDeck';
 import Canvas from './components/Canvas';
 import MessageApp from './containers/MessageApp';
+import Room from './components/Room';
 import { verifyAuthentication, fetchDecks } from './actions';
 
 // services
@@ -66,7 +67,7 @@ render(
 
         <Route path="/classroom" component={Classroom} onEnter={isAuthorized} />
 
-        <Route path="/classroom/room/:id" component={MessageApp} onEnter={isAuthorized} />
+        <Route path="/classroom/room/:id" component={Room} onEnter={isAuthorized} />
 
         <Route path="/message" component={MessageApp} onEnter={isAuthorized} />
 

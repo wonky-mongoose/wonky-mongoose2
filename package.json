@@ -85,7 +85,8 @@
     "socket.io-client": "^1.4.6",
     "twilio": "^2.9.1",
     "underscore": "^1.8.3",
-    "ws": "^1.1.0"
+    "ws": "^1.1.0",
+    "xss": "^0.2.13"
   },
   "nyc": {
     "include": [

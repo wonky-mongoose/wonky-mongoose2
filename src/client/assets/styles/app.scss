@@ -15,11 +15,27 @@ html {
   padding-right: 0 !important;
 }
 
-div.message > div.profilepic > img {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
+.message {
+  .profilepic {
+    img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+    }
+  }
 }
+
+li {
+  .profilepic {
+    img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      float: left;
+    }
+  }
+}
+
 
 div.message > div.text-wrapper {
 	border-radius: 2px;
@@ -35,11 +51,42 @@ div.message > div.text-wrapper {
     }
  }
 
-div.message > div.profilepic {
-  width: 50px;
+.message {
+  .profilepic {
+    width: 50px;
+  }	
+} 
+
+
+.row {
+  .inputfield {
+    margin-top: 20px; 
+  }	
 }
 
-div.row > div.inputfield {
-  margin-top: 20px;
+.row {
+  .card {
+    padding: 0 0;
+  }
 }
+
+.card {
+  .card-content {
+    padding: 20px 0 20px 0;
+  }
+}
+
+div.row {
+  div.message {
+    div.card-panel {
+	  margin-left: 10px;
+	  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.02),0 2px 10px 0 rgba(0,0,0,0.02);
+	  color: white;
+    }
+  }
+}
+
+
+
+
 

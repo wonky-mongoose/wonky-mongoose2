@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 export default class Canvas extends React.Component {
   constructor(props) {
     super(props);
-    this.connection = io.connect('http://localhost:3000');
+    this.connection = io.connect();
     this.path = null;
     this.isMouseDown = false;
     var updateP = throttle((this.updatePath).bind(this), 25);
