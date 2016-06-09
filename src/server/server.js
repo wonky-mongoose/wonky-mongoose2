@@ -22,7 +22,6 @@ let app = express();
 let server = require('http').Server(app);
 let io = require('socket.io')(server);
 //app.io = io;
-const connections = [];
 
 app
   .use(cors({

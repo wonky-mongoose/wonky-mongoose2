@@ -32,7 +32,7 @@ export default class MessageApp extends React.Component {
 
   constructor(props) {
   	super(props);
-    this.socket = io.connect('http://localhost:3000');
+    this.socket = io.connect();
   	this.socket.on('chat message', this.recieveMessage.bind(this));
 
   	this.state = {
@@ -81,7 +81,6 @@ export default class MessageApp extends React.Component {
           <div className='message col s12 m12 l12'>
             <div className='profilepic col s3 m3 l3'><img src='http://bit.ly/1PgOA2n'/></div>
             <div className='username col s9 m9 l9'><strong>Sean</strong></div>
-            <div className='triangle'></div>
             <div className='card-panel cyan darken-3 col s11 m11 l11'>Say something</div>
           </div>
            <div className='message col s12'>
