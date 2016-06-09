@@ -1,8 +1,10 @@
-var ChatSchema = mongoose.Schema({
+import mongoose from '../db';
+
+const ChatSchema = mongoose.Schema({
   created: Date,
   content: String,
   username: String,
   room: String
 });
 
-var Chat = mongoose.model('Chat', ChatSchema);
+const Chat = mongoose.model('Chat', ChatSchema);

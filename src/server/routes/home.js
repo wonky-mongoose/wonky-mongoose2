@@ -4,12 +4,12 @@ import indexView from '../views';
 
 const router = new Router();
 
-// router.get('*', (req, res) => {
-//   // res.sendFile(join(__dirname, '../views/index.html'));
-//   res.send(indexView);
-// });
+router.get('*', (req, res) => {
+  // res.sendFile(join(__dirname, '../views/index.html'));
+  res.send(indexView);
+});
 
-router.get('/', (req, res) => {
+router.get('/chatroom', (req, res) => {
   // res.sendFile(join(__dirname, '../views/index.html'));
   res.send(indexView);
 });
