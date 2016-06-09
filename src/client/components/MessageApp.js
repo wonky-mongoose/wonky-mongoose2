@@ -64,8 +64,7 @@ export default class MessageApp extends React.Component {
   render() {
 
   return (
-  <div className="container">
-    <h4 className="center grey-text text-darken-4">M E S S A G E</h4>
+  <div>
     <div className="row">
     <div className="card col s12 m4 l4">
       <nav>
