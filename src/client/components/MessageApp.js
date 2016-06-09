@@ -1,32 +1,6 @@
 import React, { PropTypes } from 'react';
 import io from 'socket.io-client';
-// let messages = {
-//   sean: {
-//   	user: 'Sean',
-//   	room: 'HR42',
-//   	pic: 'http://bit.ly/1PgOA2n',
-//   	messages: [{1900: 'sup?'}, {1920: 'hello?'}]
-//   },
-//   alex: {
-//   	user: 'Alex',
-//   	room: 'HR42',
-//   	pic: 'http://bit.ly/1Y7VttI',
-//   	messages: [{1921: 'pull request'}]
-//   },
-//   chris: {
-//   	user: 'Chris',
-//   	room: 'HR42',
-//   	pic: 'http://bit.ly/1PgP9cx',
-//   	messages: [{1922: 'no'}]
-//   },
-//   lynn: {
-//   	user: 'Lynn',
-//   	room: 'HR42',
-//   	pic: 'http://bit.ly/1OcG0XA',
-//   	messages: [{1925: 'lynnt'}, {1930: 'this is the worst day of my life'}]
-//   },
-
-// }
+//import AllUsers from '../../server/controllers/AllUsers';
 
 export default class MessageApp extends React.Component { 
 
@@ -38,7 +12,7 @@ export default class MessageApp extends React.Component {
   	this.state = {
   	  messages: []
   	}
-
+ 
   };
 
 
