@@ -10,3 +10,7 @@ export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
 
 export const ERR_FAILED_REQUEST = 'ERR_FAILED_REQUEST';
+
+export const UPDATE_MESSAGE = 'update-message';
+export const ADD_MESSAGE = 'add-message';
+export const ADD_RESPONSE = 'add-response';

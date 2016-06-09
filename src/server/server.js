@@ -16,7 +16,15 @@ const port = process.env.PORT || 3000;
 
 setupPassport();
 
-express()
+let app = express();
+
+//socket io
+let server = require('http').Server(app);
+let io = require('socket.io')(server);
+//app.io = io;
+const connections = [];
+
+app
   .use(cors({
     origin: '*',
     methods: ['GET, POST, OPTIONS'],
@@ -37,8 +45,27 @@ express()
   .use(passport.initialize())
   .use(passport.session())
   .use(apiRoute)
-  .use(homeRoute)
-  .listen(port);
+  .use(homeRoute);
+  
+server.listen(port);
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.emit('connect');
+  socket.on('updatePath', function(point){
+    io.emit('updatePath', point);
+  });
+  socket.on('chat message', function(msg){
+   console.log('msg', msg)
+   io.emit('chat message', msg);
+ });
+});
+
+
+// io.on('updatePath', function(point){
+//   console.log('updating path');
+//   io.emit('updatePath', point);
+// });
 
 process
   .stdout

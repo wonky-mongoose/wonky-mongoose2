@@ -18,4 +18,4 @@ export default `
       <script type="text/javascript" src="/client/app.js"></script>
     </body>
   </html>
-`;
+`

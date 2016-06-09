@@ -64,6 +64,7 @@
     "es6-promise": "^3.2.1",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
+    "install": "^0.8.1",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^2.2.4",
     "lodash": "^4.13.1",
@@ -79,7 +80,12 @@
     "react-router-redux": "^4.0.4",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
-    "twilio": "^2.9.1"
+    "snpm": "^0.1.1",
+    "socket.io": "^1.4.6",
+    "socket.io-client": "^1.4.6",
+    "twilio": "^2.9.1",
+    "underscore": "^1.8.3",
+    "ws": "^1.1.0"
   },
   "nyc": {
     "include": [
