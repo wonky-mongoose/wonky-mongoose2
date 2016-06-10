@@ -26,6 +26,7 @@ import StudyDeck from './containers/StudyDeck';
 import Canvas from './components/Canvas';
 import MessageApp from './containers/MessageApp';
 import Room from './components/Room';
+import CreateCard from './containers/CreateCard';
 import { verifyAuthentication, fetchDecks } from './actions';
 
 // services
@@ -62,6 +63,8 @@ render(
         <IndexRoute component={Menu} onEnter={isAuthorized} />
         <Route path="/flash" component={Splash} onEnter={isAuthorized} />
         <Route path="/flash/dashboard" component={Dashboard} onEnter={isAuthorized} />
+        <Route path="/flash/dashboard/flashcard" component={CreateCard} onEnter={isAuthorized} />
+
         <Route path="/flash/decks/:deckId/study" component={StudyDeck} onEnter={isAuthorized} />
 
         <Route path="/classroom" component={Classroom} onEnter={isAuthorized} />
@@ -76,6 +79,7 @@ render(
         <Route path="/profile" component={Profile} onEnter={isAuthorized} />
 
         <Route path="/canvas" component={Canvas} />
+        
       </Route>
     </Router>
   </Provider>,

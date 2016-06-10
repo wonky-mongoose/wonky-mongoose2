@@ -73,11 +73,36 @@ export const savePlay = (play, rating) => {
   );
 };
 
-// export const receiveDecks = decks => ({ type: types.RECEIVE_DECKS, data: decks });
- 
-// export const updateMessage = message => ({ type: UPDATE_MESSAGE, data: message });
- 
-// export const addMessage = () => ({ type: ADD_MESSAGE, data: message });
+export const postDeck = (name, userId) => {
+  const payload = JSON.stringify({ name, userId });
+  return dispatch => (
+    fetch(`${url}/api/createdeck`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'Content-length': payload.length,
+      },
+      credentials: 'same-origin',
+      body: payload,
+    })
+    .then(result => console.log('successfully posted', result))
+    .catch(err => dispatch(failedRequest(err)))
+  );
+}
 
-// export const addResponse = message => ({ type: ADD_RESPONSE, data: message });
-
+export const postCard = (question, answer, deckId, userId) => {
+  const payload = JSON.stringify({ question, answer, deckId, userId });
+  return dispatch => (
+    fetch(`${url}/api/createcard`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'Content-length': payload.length,
+      },
+      credentials: 'same-origin',
+      body: payload,
+    })
+    .then(result => console.log('successfully posted', result))
+    .catch(err => dispatch(failedRequest(err)))
+  );
+}

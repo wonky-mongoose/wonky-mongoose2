@@ -6,6 +6,9 @@ import plays from '../controllers/Plays';
 import auth from '../controllers/Auth';
 import twilio from '../controllers/Twilio';
 import AllUsers from '../controllers/AllUsers';
+import createDeck from '../controllers/CreateDeck';
+import createCard from '../controllers/CreateCard';
+
 
 const router = new Router();
 
@@ -36,5 +39,11 @@ router.route('/api/allusers').get(AllUsers.get);
  * Twilio
  */
 router.route('/api/token').get(auth.checkAuthServer, twilio.getToken);
+
+/*
+ * Create Deck
+ */
+router.route('/api/createdeck').post(createDeck.post);
+router.route('/api/createcard').post(createCard.post);
 
 export default router;
