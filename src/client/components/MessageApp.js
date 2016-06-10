@@ -1,32 +1,7 @@
 import React, { PropTypes } from 'react';
 import io from 'socket.io-client';
-// let messages = {
-//   sean: {
-//   	user: 'Sean',
-//   	room: 'HR42',
-//   	pic: 'http://bit.ly/1PgOA2n',
-//   	messages: [{1900: 'sup?'}, {1920: 'hello?'}]
-//   },
-//   alex: {
-//   	user: 'Alex',
-//   	room: 'HR42',
-//   	pic: 'http://bit.ly/1Y7VttI',
-//   	messages: [{1921: 'pull request'}]
-//   },
-//   chris: {
-//   	user: 'Chris',
-//   	room: 'HR42',
-//   	pic: 'http://bit.ly/1PgP9cx',
-//   	messages: [{1922: 'no'}]
-//   },
-//   lynn: {
-//   	user: 'Lynn',
-//   	room: 'HR42',
-//   	pic: 'http://bit.ly/1OcG0XA',
-//   	messages: [{1925: 'lynnt'}, {1930: 'this is the worst day of my life'}]
-//   },
-
-// }
+import fetch from 'isomorphic-fetch';
+import $ from 'jquery';
 
 export default class MessageApp extends React.Component { 
 
@@ -34,13 +9,29 @@ export default class MessageApp extends React.Component {
   	super(props);
     this.socket = io.connect();
   	this.socket.on('chat message', this.recieveMessage.bind(this));
+    
+    this.users = [];
+    this.getUsers = this.getUsers.bind(this);
+    this.msgPic;
+    this.msgName;
+    this.isThisMyPic = this.isThisMyPic.bind(this);
+    this.isThisMyName = this.isThisMyName.bind(this);
+    this.isThisMyText = this.isThisMyText.bind(this);
+    this.scrollToBottom = this.scrollToBottom.bind(this);
 
   	this.state = {
   	  messages: []
   	}
+    this.displayMSG = [];
 
+    console.log('alex?', this.props.user)
   };
 
+  componentWillMount() {
+      console.log(this.users)
+      this.getUsers();
+
+  };
 
   recieveMessage(message) {
   	console.log(this.state)
@@ -48,76 +39,107 @@ export default class MessageApp extends React.Component {
   	this.setState({
   	  messages: messages.concat(message)
   	});
-  }
-
-
-
-  sendMessage(e) {
- 	if ( this.refs.inputfield.value !== '' ) {
-	  this.socket.emit('chat message', {user: this.props.user.name, text: this.refs.inputfield.value});
-	  this.refs.inputfield.value = '';
- 	}
-	e.preventDefault(); 		
+    this.scrollToBottom();
   };
 
+  sendMessage(e) {
+  if ( this.refs.inputfield.value !== '' ) {
+    this.socket.emit('chat message', {user: this.props.user.name, text: this.refs.inputfield.value});
+    this.refs.inputfield.value = '';
+  }
+  e.preventDefault();     
+  };
+
+  getUsers() {
+    fetch('/api/allusers')
+      .then(response => response.json())
+      .then(user => {
+        this.users.push(user);
+        console.log(this.users);
+      })
+
+  }
+
+  isThisMyPic(name) {
+    return name === this.props.user.name ? 'right profilepic col s3' : 'profilepic col s3';
+  }
+
+  isThisMyName(name) {
+    return name === this.props.user.name ? 'right profilename' : 'profilename';
+  }
+
+  isThisMyText(name) {
+    return name === this.props.user.name ? 'right messagetext card-panel cyan darken-1 col s11' : 'messagetext card-panel cyan darken-3 col s11';
+  }
   
+  scrollToBottom() {
+    let height = 0;
+    $('div.message').each((i, value) => {
+      height += parseInt($(value).height());
+    });
+    height += '';
+    $('div.messagebody').animate({scrollTop: height});
+  }
+
   render() {
+
+    this.displayMSG = [];
+    this.state.messages.forEach((msg) => {
+      msg.user === this.currentUser ? this.hideUser = true : this.hideUser = false;
+      this.displayMSG.push({
+        user: msg.user,
+        text: msg.text,
+        hide: this.hideUser
+      })
+      this.currentUser = msg.user;
+    })
+    this.currentUser = '';
 
   return (
   <div>
     <div className="row">
-    <div className="card col s12 m4 l4">
-      <nav>
-        <div className="nav-wrapper cyan">
-          <ul className="right hide-on-med-and-down">
-            <li><a href="badges.html"><i className="material-icons">chat</i></a></li>
-            <li><a href="badges.html"><i className="material-icons">contacts</i></a></li>      
-        </ul>
-        </div>
-      </nav>
-      <div className="card-content grey lighten-4">
-        <div className='row'>
-          <div className='message col s12 m12 l12'>
-            <div className='profilepic col s3 m3 l3'><img src='http://bit.ly/1PgOA2n'/></div>
-            <div className='username col s9 m9 l9'><strong>Sean</strong></div>
-            <div className='card-panel cyan darken-3 col s11 m11 l11'>Say something</div>
+      <div className="messenger card col s12 m4 l4">
+        <nav className='activator'>
+          <div className="nav-wrapper cyan">
+              <span className='card-title activator'><a className='contactsbtn right'><i className="material-icons">contacts</i></a></span>
           </div>
-           <div className='message col s12'>
-            <div className='profilepic col s1'><img src='http://bit.ly/1Y7VttI'/></div>
-            <div className='username'><strong>Alex</strong></div>
-            <div className='col s11 m11 l11 card-panel'><span>This is a link</span></div>
-          </div>
-           <div className='message col s12'>
-            <div className='profilepic col s1'><img src='http://bit.ly/1OcG0XA'/></div>
-            <div className='username'><strong>Lynn</strong></div>
-            <div className='col s11 text-wrapper'>This is a link</div>
-          </div>
-           <div className='message col s12'>
-            <div className='profilepic col s1'><img src='http://bit.ly/1PgP9cx'/></div>
-            <div className='username'><strong>Chris</strong></div>
-            <div className='col s11 text-wrapper'>This is a link</div>
+        </nav>
+
+       <div className="activator cardbody card-content grey lighten-4">
+      <div className='no-margin card-content row'>
+        <div className='cardbody'>
+          <div className='messagebody'>
+            {this.displayMSG.map((message) => {
+              return (
+                <div className='message col s12'>
+                  <div className='message-whitespace' hidden={message.hide}></div>
+                  <div className='message-details' hidden={message.hide}>
+                    <div className={this.isThisMyPic(message.user)} hidden={message.hide}><img src='http://bit.ly/1PgP9cx'/></div>
+                    <div className='username col s9' hidden={message.hide}><p className={this.isThisMyName(message.user)}>{message.user}</p></div>
+                  </div>
+                  <div className={this.isThisMyText(message.user)}>{message.text}</div>
+               </div>
+              )
+            })}
           </div>
 
-          {this.state.messages.map((message) => {
-            return (
-              <div className='message col s12'>
-                <div className='profilepic col s1'><img src='http://bit.ly/1PgP9cx'/></div>
-                <div className='username'><strong>{message.user}</strong></div>
-                <div className='col s11 text-wrapper'>{message.text}</div>
-              </div>
-            )
-          })}
-
-          <div className='message inputfield col s12'>
-            <div className='profilepic col s1'><img src='http://bit.ly/1PgP9cx'/></div>
-            <form onSubmit={(e) => {this.sendMessage(e)}}>
-              <input className='col s10' ref='inputfield'/>
-              <button type='submit' onClick={(e) => {this.sendMessage(e)}}></button>
+          <div className='card-action message inputfield col s12'>
+            <div className='profilepic col s2'><img src='http://bit.ly/1PgP9cx'/></div>
+            <form className='col s10' onSubmit={(e) => {this.sendMessage(e)}}>
+              <input className='' ref='inputfield'/>
             </form>
           </div>
+
+
         </div>
       </div>
-    </div>
+      </div>
+
+        <div className='card-reveal'>
+          <span className='card-title'>Classmates<i className="material-icons right">close</i></span>
+          {JSON.stringify(this.users)}
+        </div>
+      </div>
     </div>
   </div>
 
@@ -129,6 +151,4 @@ export default class MessageApp extends React.Component {
 MessageApp.propTypes = {
   user: PropTypes.object
 }
-          // <ul className="left hide-on-med-and-down">
-          //   <li><div className='profilepic'><img src='http://bit.ly/1PgOA2n'/></div></li>
-          // </ul>
+
