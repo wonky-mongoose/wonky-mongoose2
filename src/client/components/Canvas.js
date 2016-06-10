@@ -20,12 +20,15 @@ export default class Canvas extends React.Component {
         });
       })
     }).bind(this));
-
+    this.stroke = {
+      color: 'black',
+      width: '3',
+    };
     this.changeColor = this.changeColor.bind(this);
   }
 
   emitPath(e) {
-    this.connection.emit('updatePath', { x: e.point.x, y: e.point.y, color: this.stroke.color});
+    this.connection.emit('updatePath', { x: e.point.x, y: e.point.y, color: this.stroke.color });
   }
 
   updatePath(point) {
