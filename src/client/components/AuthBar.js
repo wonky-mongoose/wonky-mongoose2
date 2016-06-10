@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 const AuthBar = ({ user, mobile }) => {
   const name = user ? user.name : '';
-
+  console.log('AUTH BAR', user.name);
   // TODO: factor these out
   if (mobile) {
     return (
