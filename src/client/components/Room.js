@@ -3,24 +3,20 @@ import Webcam from './Webcam';
 import MessageApp from '../containers/MessageApp';
 import Canvas from './Canvas';
 
-class Room extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div className="container">
-        <div className="row">
-          <h4 className="center grey-text text-darken-4">R O O M  4 2</h4>
-          <Webcam location={this.props.location} className="col s12" />
-          <MessageApp className="col m4 l4"/>
-          <Canvas className="col m8 l8"/>
-        </div>
+const Room = (props) => (
+  <div className="">
+    <div className="row">
+      <h4 className="center grey-text text-darken-4">R O O M  4 2</h4>
+      <div className="col s3">
+        <Webcam location={props.location} className="col s12" />
+        <MessageApp className="col s12" />
       </div>
-    );
-  }
-}
+      <div className="col s9">
+        <Canvas className="col s12" />
+      </div>
+    </div>
+  </div>
+);
 
 Room.propTypes = {
   location: PropTypes.object.isRequired,

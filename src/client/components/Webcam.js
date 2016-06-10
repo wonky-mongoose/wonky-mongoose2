@@ -136,14 +136,14 @@ class Webcam extends Component {
   render() {
     const isOwner = (this.state.ownerID === this.state.identity);
     return (
-      <div className="container">
+      <div className="">
         <div className="row">
-          <div className="col s7">
+          <div className="col s12">
             {(() => {
               switch (isOwner) {
                 case true:
                   return (
-                    <div>
+                    <div className="center-align">
                       <input
                         type="button"
                         id="button-preview"
@@ -156,13 +156,15 @@ class Webcam extends Component {
                   );
                 case false:
                   return (
-                    <input
-                      type="button"
-                      id="button-invite"
-                      className="waves-effect waves-light btn"
-                      onClick={this.handleInvite}
-                      value="Join Broadcast"
-                    />
+                    <div className="center-align">
+                      <input
+                        type="button"
+                        id="button-invite"
+                        className="waves-effect waves-light btn"
+                        onClick={this.handleInvite}
+                        value="Join Broadcast"
+                      />
+                    </div>
                   );
                 default:
                   return null;

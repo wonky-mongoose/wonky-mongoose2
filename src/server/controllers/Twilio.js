@@ -9,6 +9,12 @@ const ConversationsGrant = AccessToken.ConversationsGrant;
 // Hold information for rooms
 const rooms = {};
 
+const getRoom = (req, res) => {
+  res.status(200).type('json').json({
+    doesExist: !!rooms[req.query.room],
+  });
+};
+
 const getToken = (req, res) => {
   // Get identity from parameters
   const identity = req.query.identity;
@@ -51,4 +57,4 @@ const getToken = (req, res) => {
     });
 };
 
-export default { getToken };
+export default { getToken, getRoom };
