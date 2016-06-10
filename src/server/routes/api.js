@@ -35,6 +35,7 @@ router.route('/api/allusers').get(AllUsers.get);
 /*
  * Twilio
  */
+router.route('/api/checkroom').get(auth.checkAuthServer, twilio.getRoom);
 router.route('/api/token').get(auth.checkAuthServer, twilio.getToken);
 
 export default router;
