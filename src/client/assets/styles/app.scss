@@ -70,23 +70,88 @@ div.message > div.text-wrapper {
   }
 }
 
-.card {
+.messenger {
   .card-content {
-    padding: 20px 0 20px 0;
+    padding: 0px 0 0px 0;
   }
 }
 
 div.row {
   div.message {
-    div.card-panel {
-	  margin-left: 10px;
-	  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.02),0 2px 10px 0 rgba(0,0,0,0.02);
-	  color: white;
+    div.message-whitespace {
+      margin-top: 20px;
     }
   }
 }
 
+div.row {
+  div.message {
+    div.message-details {
+      &:after{
+        content: "";
+        display: table;
+        clear: both;
+      }
+    }
+  }
+}
 
+div.messagebody {
+  div.message {
+    div.messagetext {
+      width: initial;
+      margin-left: 10px;
+      margin-right: 10px;
+	  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.02),0 2px 10px 0 rgba(0,0,0,0.02);
+	  color: white;
+	  margin-top: 1px;
+	  margin-bottom: 0;
+	  overflow-wrap: break-word;
+	  word-wrap: break-word;
+  	  word-break: break-word;
+    }
+  }
+}
 
+.cardbody {
+  .inputfield {
+    margin-bottom: 0;
+    background-color: white;
+    color: black;
+  }
+}
+
+.messenger {
+  .cardbody {
+    .card-content {
+      .cardbody {
+        .messagebody {
+	      height: 40vh;
+	      width: 100%;
+	      margin-bottom: 0px;
+	      overflow-y: scroll;
+        }
+      }
+    }
+  }
+}
+
+.nav-wrapper {
+  .contactsbtn {
+    margin-right: 10px;
+  }
+}
+
+.username {
+  .profilename {
+    padding-bottom: 30px;
+  }
+}
+
+.cardbody {
+  .no-margin {
+    margin-bottom: 0;
+  }
+}
 
 
