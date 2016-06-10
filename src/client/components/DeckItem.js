@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { selectDeck } from '../actions';
+import { selectDeck, deleteDeck } from '../actions';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import ProgressBar from './ProgressBar';
@@ -7,11 +7,13 @@ import DeckLastPlayed from './DeckLastPlayed';
 
 const mapDispatchToState = (dispatch) => ({
   setDeckState: (deck) => dispatch(selectDeck(deck)),
+  deleteDeck: (deckId) => dispatch(deleteDeck(deckId)),
 });
 
 class DeckItem extends Component {
   constructor(props) {
     super(props);
+    console.log('THESE ARE PROPS INSIDE DECKITEM', props);
     this.chooseDeckToStudy = this.chooseDeckToStudy.bind(this);
     this.state = {
       lastPlayedAt: '',
@@ -33,6 +35,12 @@ class DeckItem extends Component {
     browserHistory.push(`/flash/decks/${this.props.deck._id}/study`);
   }
 
+  deleteDeck() {
+    console.log('INSIDE DELETE!!!', this.props.deck._id)
+    this.props.deleteDeck(this.props.deck._id);
+  }
+
+
   render() {
     return (
       <div className="card-item">
@@ -46,6 +54,9 @@ class DeckItem extends Component {
             <div className="center">
               <button onClick={this.chooseDeckToStudy} className="btn cyan lighten-3">
                 Study
+              </button>
+              <button onClick={this.deleteDeck.bind(this)} className="btn orange lighten-3">
+                Delete
               </button>
             </div>
           </div>

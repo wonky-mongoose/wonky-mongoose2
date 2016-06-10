@@ -4,7 +4,7 @@ import DeckItem from './DeckItem';
 export default class Decks extends React.Component {
   constructor(props) {
     super(props);
-    console.log('these are props', props);
+    console.log('these are props NOWWWW', props);
   }
 
   handleSubmit (event) {

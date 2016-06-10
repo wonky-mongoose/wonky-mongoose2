@@ -30,4 +30,15 @@ const progress = (req, res) => {
   });
 };
 
-export default { findAll, findNextCard, progress };
+const deleteDeck = (req, res) => {
+  Deck.remove({
+    _id: req.params.deckId
+  }).then((deck) => {
+    res
+      .status(200)
+      .type('json')
+      .json(deck);
+  });
+};
+
+export default { findAll, findNextCard, progress, deleteDeck };

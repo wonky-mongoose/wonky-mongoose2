@@ -4,8 +4,8 @@ import { postDeck } from '../actions';
 
 const mapStateToProps = ({ decks, user }) => ({ decks, user });
 const mapDispatchToProps = (dispatch) => ({
-  postDeck: (deckName, userId) => {
-    dispatch(postDeck(deckName, userId));
+  postDeck: (name, userId) => {
+    dispatch(postDeck(name, userId));
   },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Decks);

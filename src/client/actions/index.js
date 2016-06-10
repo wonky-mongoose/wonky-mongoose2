@@ -106,3 +106,20 @@ export const postCard = (question, answer, deckId, userId) => {
     .catch(err => dispatch(failedRequest(err)))
   );
 }
+
+export const deleteDeck = (deckId) => {
+  const payload = JSON.stringify({ deckId });
+  return dispatch => (
+    fetch(`${url}/api/decks/${deckId}`, {
+      method: 'Delete',
+      headers: {
+        'Content-type': 'application/json',
+        'Content-length': payload.length,
+      },
+      credentials: 'same-origin',
+      body: payload,
+    })
+    .then(result => console.log('successfully deleted', result))
+    .catch(err => dispatch(failedRequest(err)))
+  );
+}

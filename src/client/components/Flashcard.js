@@ -16,7 +16,8 @@ class Flashcard extends React.Component {
       question: this.refs.question.value,
       answer: this.refs.answer.value,
     }
-    console.log('THIS IS FORM DATA', formData);
+    // this.props.postCard(this.refs.question.value, this.refs.answer.value, deck.Id, this.props.user._id)
+    // console.log('THIS IS FORM DATA', formData, this.props.postCard);
   }
 
   render() {

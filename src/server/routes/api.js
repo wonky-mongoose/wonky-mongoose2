@@ -18,6 +18,8 @@ const router = new Router();
 router.route('/api/decks').get(auth.checkAuthServer, decks.findAll);
 router.route('/api/card').post(auth.checkAuthServer, decks.findNextCard);
 router.route('/api/progress').post(auth.checkAuthServer, decks.progress);
+router.route('/api/decks/:deckId').delete(auth.checkAuthServer, decks.deleteDeck);
+
 
 /*
  * Plays
