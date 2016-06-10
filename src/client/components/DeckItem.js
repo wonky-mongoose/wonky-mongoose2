@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { selectDeck, deleteDeck } from '../actions';
+import { selectDeck, deleteDeck, getFlashcards } from '../actions';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import ProgressBar from './ProgressBar';
@@ -8,7 +8,10 @@ import DeckLastPlayed from './DeckLastPlayed';
 const mapDispatchToState = (dispatch) => ({
   setDeckState: (deck) => dispatch(selectDeck(deck)),
   deleteDeck: (deckId) => dispatch(deleteDeck(deckId)),
+  getFlashcards: (deckId) => {console.log('THIS IS DECKID', deckId); dispatch(getFlashcards(deckId))}
 });
+const mapStateToProps = ({ decks, user, cards }) => ({ decks, user, cards });
+
 
 class DeckItem extends Component {
   constructor(props) {
@@ -18,6 +21,8 @@ class DeckItem extends Component {
     this.state = {
       lastPlayedAt: '',
     };
+    // console.log('THIS IS DECK ID', this.props.deck._id, this.props.getFlashcards);
+    // console.log('THESE ARE FLASHCARDS',this.props.getFlashcards(this.props.deck._id));
   }
 
   componentWillMount() {
@@ -36,16 +41,24 @@ class DeckItem extends Component {
   }
 
   deleteDeck() {
-    console.log('INSIDE DELETE!!!', this.props.deck._id)
     this.props.deleteDeck(this.props.deck._id);
+  }
+
+  getCards() {
+    this.props.getFlashcards(this.props.deck._id);
+    console.log('flashies has been clicked!!!', );
   }
 
 
   render() {
+
     return (
       <div className="card-item">
         <div className="card-panel hoverable">
           <div className="card-content">
+              <button className="btn cyan lighten-3" onClick={() => browserHistory.push('/flash/dashboard/flashcard')}>
+                Edit Deck
+              </button>
             <div className="card-title grey-text text-darken-4 center">
               <strong>{this.props.deck.name}</strong>
             </div>
@@ -54,6 +67,9 @@ class DeckItem extends Component {
             <div className="center">
               <button onClick={this.chooseDeckToStudy} className="btn cyan lighten-3">
                 Study
+              </button>
+              <button onClick={this.getCards.bind(this)} className="btn orange lighten-3">
+                get flashies
               </button>
               <button onClick={this.deleteDeck.bind(this)} className="btn orange lighten-3">
                 Delete
@@ -71,4 +87,4 @@ DeckItem.propTypes = {
   setDeckState: PropTypes.func.isRequired,
 };
 
-export default connect(null, mapDispatchToState)(DeckItem);
+export default connect(mapStateToProps, mapDispatchToState)(DeckItem);

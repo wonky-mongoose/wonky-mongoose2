@@ -7,7 +7,7 @@ class Flashcard extends React.Component {
   constructor(props) {
     super(props);
     console.log('props in flashcard', props);
-
+    
   };
 
   handleSubmit (event) {
@@ -16,8 +16,7 @@ class Flashcard extends React.Component {
       question: this.refs.question.value,
       answer: this.refs.answer.value,
     }
-    // this.props.postCard(this.refs.question.value, this.refs.answer.value, deck.Id, this.props.user._id)
-    // console.log('THIS IS FORM DATA', formData, this.props.postCard);
+
   }
 
   render() {
@@ -36,7 +35,6 @@ class Flashcard extends React.Component {
 
 export default Flashcard;
 
-// onSubmit={this.handleSubmit.bind(this)}
 
 
 

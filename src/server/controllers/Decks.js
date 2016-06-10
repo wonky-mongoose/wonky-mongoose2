@@ -1,5 +1,5 @@
 import Deck from '../models/Deck';
-
+import Card from '../models/Card';
 import getCard from '../services/DeckProgress';
 import getProgress from '../services/ProgressBar.js';
 
@@ -41,4 +41,15 @@ const deleteDeck = (req, res) => {
   });
 };
 
-export default { findAll, findNextCard, progress, deleteDeck };
+const getFlashcards = (req, res) => {
+  Card.find({
+    deckId: req.params.deckId
+  }).then((cards) => {
+    res
+      .status(200)
+      .type('json')
+      .json(cards);
+  });
+};
+
+export default { findAll, findNextCard, progress, deleteDeck, getFlashcards };

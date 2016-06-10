@@ -123,3 +123,21 @@ export const deleteDeck = (deckId) => {
     .catch(err => dispatch(failedRequest(err)))
   );
 }
+
+export const receiveCards = cards => {console.log('THESE ARE CARDS', cards); return { type: types.RECEIVE_CARDS, data: cards }};
+export const getFlashcards = (deckId) => {
+  const payload = JSON.stringify({ deckId });
+  console.log('THIS IS PAYLOAD', payload);
+  return dispatch => (
+    fetch(`${url}/api/decks/${deckId}/flashcards`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        'Content-length': payload.length,
+      },
+      credentials: 'same-origin',
+    })
+    .then(res => res.json())
+    .then(cards => dispatch(receiveCards(cards)))
+  );
+};
