@@ -11,6 +11,7 @@ const handleSubmit = e => {
     .then(response => response.json())
     .then(data => {
       if (data.doesExist) {
+        Materialize.toast(`Entered ${room}.`, 3000);
         browserHistory.push(`/classroom/room/${room}`);
       } else {
         Materialize.toast(`Room ${room} doesn't exist!`, 3000);
@@ -19,6 +20,7 @@ const handleSubmit = e => {
 };
 
 const createRoom = () => {
+  Materialize.toast('Created Room!', 3000);
   browserHistory.push(`/classroom/room/${(Date.parse(new Date())).toString()}`);
 };
 

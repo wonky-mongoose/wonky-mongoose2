@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Webcam from './Webcam';
+import Webcam from '../containers/Webcam';
 import MessageApp from '../containers/MessageApp';
 import Canvas from './Canvas';
 

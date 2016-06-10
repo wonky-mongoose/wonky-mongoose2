@@ -83,8 +83,10 @@ render(
 );
 
 if (DEBUG) {
-  /* eslint-disable-next-line no-console */
-  store.subscribe(() => console.log(store.getState()));
+  store.subscribe(() => {
+    /* eslint-disable-next-line no-console */
+    console.log(store.getState());
+  });
 }
 
 store.dispatch(verifyAuthentication());

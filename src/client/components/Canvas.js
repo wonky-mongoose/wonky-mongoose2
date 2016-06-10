@@ -1,5 +1,6 @@
 import React from 'react';
 import paper, { Path, PaperScope, Color, Point} from 'paper';
+import Pallete from './Pallete';
 import { throttle } from 'underscore';
 import io from 'socket.io-client';
 
@@ -13,19 +14,27 @@ export default class Canvas extends React.Component {
     this.connection.on('connect', ((sock) => {
       console.log('connected!');
       this.connection.on('updatePath', (point) => {
-        updateP(new Point(point.x, point.y));
+        updateP({
+          point: new Point(point.x, point.y),
+          color: point.color,
+        });
       })
     }).bind(this));
+
+    this.changeColor = this.changeColor.bind(this);
   }
 
   emitPath(e) {
-    this.connection.emit('updatePath', {x : e.point.x, y: e.point.y});
+    this.connection.emit('updatePath', { x: e.point.x, y: e.point.y, color: this.stroke.color});
   }
 
   updatePath(point) {
-    this.path.strokeColor = 'black';
-    //path.smooth();
-    this.path.add(point);
+    const incomingColor = point.color;
+    console.log(incomingColor);
+    const originalColor = this.stroke.color;
+    this.path.strokeColor = incomingColor;
+    this.path.add(point.point);
+    // this.path.strokeColor = originalColor;
   }
 
   componentDidMount() {
@@ -54,10 +63,21 @@ export default class Canvas extends React.Component {
     paper.view.draw();
   }
 
+  changeColor(color) {
+    this.path = new Path();
+    this.stroke.color = color;
+    this.stroke.width = color === 'white' ? '50' : '3';
+    this.path.strokeColor = this.stroke.color;
+    this.path.strokeWidth = this.stroke.width;
+  }
+
   render() {
     return (
       <div>
-        <canvas id='myCanvas' resize='true'></canvas>
+        <div>
+          <Pallete changeColor={this.changeColor} />
+        </div>
+        <div><canvas className='card' id='myCanvas' resize='true'></canvas></div>
       </div>
     )
   }

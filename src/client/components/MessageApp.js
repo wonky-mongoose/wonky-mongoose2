@@ -98,7 +98,7 @@ export default class MessageApp extends React.Component {
   return (
   <div>
     <div className="row">
-      <div className="messenger card col s12 m4 l4">
+      <div className="messenger card col s12">
         <nav className='activator'>
           <div className="nav-wrapper cyan">
               <span className='card-title activator'><a className='contactsbtn right'><i className="material-icons">contacts</i></a></span>

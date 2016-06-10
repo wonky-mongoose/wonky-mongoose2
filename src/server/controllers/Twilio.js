@@ -16,22 +16,16 @@ const getRoom = (req, res) => {
 };
 
 const getToken = (req, res) => {
-  // Get identity from parameters
+  // Get room id and identity from parameters
   const identity = req.query.identity;
-  // Create the user number
-  const userNum = (rooms[identity]) ? rooms[identity].userID : 0;
-  // Create new id for each user
-  const newId = `${identity}${userNum}`;
-  // Create a new room if it doesn't exist
-  if (!rooms[identity]) {
-    rooms[identity] = {
-      userID: 0,
-      owner: newId,
-    };
-  } else rooms[identity][newId] = newId;
-  // Increment the userID count for the next user (keeps all new IDS unique)
-  rooms[identity].userID++;
+  const roomID = req.query.room;
 
+  // Create a new room if it doesn't exist
+  if (!rooms[roomID]) {
+    rooms[roomID] = identity;
+  }
+  // Set the room owner
+  const roomOwner = rooms[roomID];
   // Generate token
   const token = new AccessToken(
     process.env.TWILIO_ACCOUNT_SID,
@@ -40,7 +34,7 @@ const getToken = (req, res) => {
   );
 
   // Assign the generated identity to the token
-  token.identity = newId;
+  token.identity = identity;
 
   // Grant the access token Twilio Video capabilities
   const grant = new ConversationsGrant();
@@ -52,7 +46,8 @@ const getToken = (req, res) => {
     .status(200)
     .type('json')
     .json({
-      identity: newId,
+      ownerID: roomOwner,
+      identity: identity,
       token: token.toJwt(),
     });
 };
