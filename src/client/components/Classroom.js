@@ -32,7 +32,7 @@ const Classroom = () => (
       <div className="col m6 s12">
         <div className="col s12 no-side-padding">
           <div
-            className="card cyan lighten-5 hoverable"
+            className="card cyan lighten-5 hoverable clickable-card"
             onClick={createRoom}
           >
             <div className="card-content">
@@ -43,7 +43,7 @@ const Classroom = () => (
         </div>
         <div className="col s12 no-side-padding">
           <div
-            className="card cyan lighten-5 hoverable"
+            className="card cyan lighten-5 hoverable clickable-card"
             onClick={() => browserHistory.push('/classroom/notes')}
           >
             <div className="card-content">

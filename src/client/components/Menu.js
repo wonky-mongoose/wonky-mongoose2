@@ -8,7 +8,7 @@ const Menu = () => (
     <div className="row">
       <div className="col m6 s12">
         <div
-          className="card cyan lighten-5 hoverable"
+          className="card cyan lighten-5 hoverable clickable-card"
           onClick={() => browserHistory.push('/flash')}
         >
           <div className="card-content">
@@ -19,7 +19,7 @@ const Menu = () => (
       </div>
       <div className="col m6 s12">
         <div
-          className="card cyan lighten-5 hoverable"
+          className="card cyan lighten-5 hoverable clickable-card"
           onClick={() => browserHistory.push('/classroom')}
         >
           <div className="card-content">
