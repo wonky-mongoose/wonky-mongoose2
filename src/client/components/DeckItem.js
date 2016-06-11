@@ -4,7 +4,6 @@ import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import ProgressBar from './ProgressBar';
 import DeckLastPlayed from './DeckLastPlayed';
-import Flashcard from './Flashcard';
 
 const mapDispatchToState = (dispatch) => ({
   setDeckState: (deck) => dispatch(selectDeck(deck)),
@@ -46,18 +45,13 @@ class DeckItem extends Component {
   }
 
   getCards() {
+    this.props.getFlashcards(this.props.deck._id);
     console.log('flashies has been clicked!!!', );
-    browserHistory.push(`/flash/decks/${this.props.deck._id}/flashcards`);
-
   }
 
 
   render() {
-         if(Array.isArray(this.props.cards)) {
-       var cards = this.props.cards;
-     } else {
-      cards = [];
-     }
+
     return (
       <div className="card-item">
         <div className="card-panel hoverable">
