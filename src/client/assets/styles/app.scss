@@ -182,4 +182,7 @@ div.card-reveal{
   }	
 }
 
+.list-spacing:not(:first-child) {
+  margin-top: 25px;
+}
 

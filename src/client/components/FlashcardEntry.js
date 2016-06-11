@@ -9,13 +9,11 @@ export default class FlashcardEntry extends React.Component {
 
   render() {
     return (
-      <div>
-        <li>
-         <div>Question: {this.props.card.answer.explanation}</div>
-         <div>Answer: {this.props.card.answer.text}</div>
-         <div>Explanation: {this.props.card.question.text}</div>
-        </li>
-      </div>
+      <li className='card grey lighten-3 list-spacing'>
+       <div>Question: {this.props.card.answer.explanation}</div>
+       <div>Answer: {this.props.card.answer.text}</div>
+       <div>Explanation: {this.props.card.question.text}</div>
+      </li>
     );
   }
 }
