@@ -62,7 +62,7 @@ io.on('connection', (socket) => {
     //console.log('roomname', roomname)
     socket.join(roomname);
     io.to(roomname).emit('chat history', storageMSG[roomname])
-    io.to(roomname).emit('canvas history', storagePoint[roomname])
+    io.to(roomname).emit('canvas history', storagePoint[roomname] || [])
   })
   socket.on('user', (user) => {
     members[roomname] ? members[roomname].push(user) : members[roomname] = [user];
