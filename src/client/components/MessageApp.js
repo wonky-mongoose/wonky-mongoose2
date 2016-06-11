@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import io from 'socket.io-client';
 import fetch from 'isomorphic-fetch';
 import $ from 'jquery';
+import Twemoji from 'react-twemoji';
 
 export default class MessageApp extends React.Component { 
 
@@ -40,9 +41,15 @@ export default class MessageApp extends React.Component {
 
   recieveMessage(message) {
   	let messages = this.state.messages;
+    message.text = message.text.replace(
+      /\\u([\d\w]{4})/gi,
+      (match, grp) => String.fromCharCode(parseInt(grp, 16))
+    );
+    message.text = unescape(message.text);
   	this.setState({
   	  messages: messages.concat(message)
   	});
+
     this.scrollToBottom();
   };
 
@@ -109,7 +116,7 @@ export default class MessageApp extends React.Component {
           </div>
         </nav>
 
-       <div className="activator cardbody card-content grey lighten-4">
+      <div className="activator cardbody card-content grey lighten-4">
       <div className='no-margin card-content row'>
         <div className='cardbody'>
           <div className='messagebody'>
@@ -121,7 +128,7 @@ export default class MessageApp extends React.Component {
                     <div className={this.isThisMyPic(message.user)} hidden={message.hide}><img src='http://bit.ly/1PgP9cx'/></div>
                     <div className='username col s9' hidden={message.hide}><p className={this.isThisMyName(message.user)}>{message.user}</p></div>
                   </div>
-                  <div className={this.isThisMyText(message.user)}>{message.text}</div>
+                  <div className={this.isThisMyText(message.user)}><Twemoji>{message.text}</Twemoji></div>
                </div>
               )
             })}
