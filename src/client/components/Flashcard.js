@@ -41,9 +41,9 @@ class Flashcard extends React.Component {
         <h1 className="center">Flashcards</h1>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input type="text" ref="question" placeholder="Question"/>
-          <input type="text" ref="explanation" placeholder="Answer"/>
-          <input type="text" ref="text" />
-          <input type="submit" value="post new card" placeholder="Explanation"/>
+          <input type="text" ref="text" placeholder="Answer"/>
+          <input type="text" ref="explanation" placeholder="Explanation"/>
+          <input type="submit" value="Add a New Card"/>
         </form>
         <div>
           <ul>
