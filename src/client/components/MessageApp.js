@@ -58,17 +58,26 @@ export default class MessageApp extends React.Component {
       console.log('History', data);
       data !== null ? this.state.messages = data : data;
     })
+    // this.socket.on('profilepic', (data) => {
+    //   console.log('History', data);
+    //   data !== null ? this.state.messages = data : data;
+    // })
   };
 
   componentWillMount() {
     if( this.props.user['name'] !== null ) {
       this.socket.emit('user', this.props.user['name']);
       this.socket.on('user', (users) => {
+        const filtered = [];
         users.forEach((user) => {
           console.log(user);
-          user!== null ? this.users[user] = 1 : user;
+          if(user.user !== null) {
+            this.users[user.user] = user.profile; 
+          }
+          console.log('this.user', this.users)
           this.setState({
-            users: Object.keys(this.users)
+            users: this.users
+            // users: Object.keys(this.users)
           })
           console.log('users', this.state.users)
         })
@@ -88,12 +97,15 @@ export default class MessageApp extends React.Component {
       this.socket.emit('user', this.props.user['name']);
       this.socket.on('user', (users) => {
         users.forEach((user) => {
-          console.log(user)
-          user!== null ? this.users[user] = 1 : user;
+          console.log(user);
+          if(user.user !== null) {
+            this.users[user.user] = user.profile; 
+          }
           this.setState({
-            users: Object.keys(this.users)
+            users: this.users
+            // users: Object.keys(this.users)
           })
-          console.log('users',this.state.users)
+          console.log('users', this.state.users)
         })
       })
     }
@@ -228,7 +240,7 @@ export default class MessageApp extends React.Component {
                 <div className='message col s12'>
                   <div className='message-whitespace' hidden={message.hide}></div>
                   <div className='message-details' hidden={message.hide}>
-                    <div className={this.isThisMyPic(message.user)} hidden={message.hide}><img className='face' src='http://bit.ly/1PgP9cx'/></div>
+                    <div className={this.isThisMyPic(message.user)} hidden={message.hide}><img className='face' src={this.state.users[message.user]}/></div>
                     <div className='username col s9' hidden={message.hide}><p className={this.isThisMyName(message.user)}>{message.user}</p></div>
                   </div>
                   <div className={this.isThisMyText(message.user)}><Twemoji>{message.text}</Twemoji></div>
@@ -252,10 +264,11 @@ export default class MessageApp extends React.Component {
         <div className='card-reveal'>
           <span className='card-title'>Classmates<i className="material-icons right">close</i></span>       
           <ul id='classmates' className="collection">
-            {this.state.users.map((user) => {
+            {Object.keys(this.state.users).map((user) => {
               return (
+
                 <li id='classmate' className="collection-item avatar">
-                  <img src="http://bit.ly/1PgP9cx" alt="" className="circle"/>
+                  <img src={this.state.users[user]} alt="" className="circle"/>
                   <span className="title">{user}</span>
                 </li>
               )
