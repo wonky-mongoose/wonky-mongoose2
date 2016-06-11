@@ -6,29 +6,28 @@ import FlashcardEntry from './FlashcardEntry';
 
 class Flashcard extends React.Component {
   constructor(props) {
-    super(props);
-    console.log('props in flashcard!!!', props);
-    
+    super(props);    
   };
 
   handleSubmit (event) {
     event.preventDefault();
     var formData = {
       question: this.refs.question.value,
-      answer: this.refs.answer.value,
+      explanation: this.refs.explanation.value,
+      text: this.refs.text.value
     }
-
+    this.props.postCard(this.refs.question.value, this.refs.explanation.value, this.refs.text.value, this.props.params.deckId, this.props.user._id);
+    this.refs.question.value = '';
+    this.refs.explanation.value = '';
+    this.refs.text.value = '';
   }
 
   componentDidMount() {
-    console.log('IM IN getFlashcards')
     this.props.getFlashcards(this.props.params.deckId);
-    console.log('i got called!!!', this.props.cards);
   }
 
 
   render() {
-    console.log('THESE ARE MY CARDS', this.props.cards)
    if(Array.isArray(this.props.cards)) {
         var cards = this.props.cards;
      } else {
@@ -39,9 +38,10 @@ class Flashcard extends React.Component {
       <div className="container">
         <h1 className="center">Flashcards</h1>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <input type="text" ref="question" />
-          <input type="text" ref="answer" />
-          <input type="submit" value="post new card"/>
+          <input type="text" ref="question" placeholder="Question"/>
+          <input type="text" ref="explanation" placeholder="Answer"/>
+          <input type="text" ref="text" />
+          <input type="submit" value="post new card" placeholder="Explanation"/>
         </form>
         <div>
           <ul>
