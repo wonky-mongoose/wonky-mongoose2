@@ -146,3 +146,21 @@ export const getFlashcards = (deckId) => {
     .then(cards => dispatch(receiveCards(cards)))
   );
 };
+
+export const removeCard = card => { console.log('THESE ARE REMOVE CARDS', card); return { type: types.REMOVE_CARD, data: card }};
+export const deleteCard = (cardId) => {
+  const payload = JSON.stringify({ cardId });
+  return dispatch => (
+    fetch(`${url}/api/card/${cardId}`, {
+      method: 'Delete',
+      headers: {
+        'Content-type': 'application/json',
+        'Content-length': payload.length,
+      },
+      credentials: 'same-origin',
+      body: payload,
+    })
+    .then(cardId => dispatch(deleteCard(cardId)))
+    .catch(err => dispatch(failedRequest(err)))
+  );
+}

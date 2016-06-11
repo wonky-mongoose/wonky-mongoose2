@@ -13,6 +13,10 @@ export default class Decks extends React.Component {
     this.props.postDeck(this.refs.name.value, this.props.user._id);
   }
   
+  deleteCard() {
+    this.props.deleteCard(this.props.deck._id);
+  }
+
   render () {  
     return (
       <div className="container">
