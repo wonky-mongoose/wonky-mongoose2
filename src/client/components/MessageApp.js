@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import io from 'socket.io-client';
 import fetch from 'isomorphic-fetch';
-import $ from 'jquery';
+import Twemoji from 'react-twemoji';
 
 export default class MessageApp extends React.Component { 
 
@@ -21,14 +21,36 @@ export default class MessageApp extends React.Component {
 
   	this.state = {
   	  messages: [],
-      users: []
+      users: [],
+      emojis: [
+        "😀", "😬", "😁", "😂", "😃", "😄", "😅", "😆", "😇", "😉",
+        "😊", "🙂", "🙃", "☺️", "😋", "😌", "😍", "😘", "😗", "😙", "😚",
+        "😜", "😝", "😛", "🤑", "🤓", "😎", "🤗", "😏", "😶", "😐", "😑",
+        "😒", "🙄", "🤔", "😳", "😞", "😟", "😠", "😡", "😔", "😕", "🙁",
+        "☹️", "😣", "😖", "😫", "😩", "😤", "😮", "😱", "😨", "😰", "😯",
+        "😦", "😧", "😢", "😥", "😪", "😓", "😭", "😵", "😲", "🤐", "😷",
+        "🤒", "🤕", "😴", "💤", "💩", "😈", "👿", "👹", "👺", "💀", "👻",
+        "👽", "🤖", "😺", "😸", "😹", "😻", "😼", "😽", "🙀", "😿", "😾",
+        "🙌", "👏", "👋", "👍", "👊", "✊", "✌️", "👌", "✋", "💪", "🙏",
+        "☝️", "👆", "👇", "👈", "👉", "🖕", "🤘", "🖖", "✍️", "💅", "👄",
+        "👅", "👂", "👃", "👁", "👀", "👤", "🗣", "👶", "👦", "👧", "👨",
+        "👩", "👱", "👴", "👵", "👲", "👳", "👮", "👷", "💂", "🕵", "🎅",
+        "👼", "👸", "👰", "🚶", "🏃", "💃", "👯", "👫", "👬", "👭", "🙇",
+        "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💇", "💆", "💑", "👩‍❤️‍👩",
+        "👨‍❤️‍👨", "💏", "👩‍❤️‍💋‍👩", "👨‍❤️‍💋‍👨", "👪", "👨‍", "👩", "‍👧", "👨‍",
+        "👩", "‍👧", "👦", "👨‍", "👩", "‍👦", "👦", "👨‍","👩", "👚", "👕",
+        "👖", "👔", "👙", "👘", "💄", "💋", "👣", "👠", "👡", "👢", "👞",
+        "👟", "👒", "🎩", "⛑", "🎓", "👑", "🎒", "👝", "👛", "👜", "💼",
+        "👓", "🕶", "💍", "🌂"],
   	}
 
     
     this.displayMSG = [];
 
+
     this.socket.emit('room', this.props.location.pathname);
     // this.socket.on('chat history', this.recieveHistory.bind(this));
+
     console.log('props', props.location)
     console.log('this props', this.props.user['name'])
 
@@ -83,10 +105,26 @@ export default class MessageApp extends React.Component {
     });
     console.log('history', messages)
     this.scrollToBottom();
+    this.getUsers().then(users => {
+      //console.log('users', props.location.pathname);
+      this.setState({
+        users: users
+      })
+    });
+  };
+
+  decodeEmoji(message) {
+    let decoded = message.replace(
+      /\\u([\d\w]{4})/gi,
+      (match, grp) => String.fromCharCode(parseInt(grp, 16))
+    );
+    decoded = unescape(decoded);
+    return decoded;
   }
 
   recieveMessage(message) {
   	let messages = this.state.messages;
+    message.text = this.decodeEmoji(message.text);
   	this.setState({
   	  messages: messages.concat(message)
   	});
@@ -132,8 +170,18 @@ export default class MessageApp extends React.Component {
     $('div.messagebody').animate({scrollTop: height});
   }
 
-  render() {
+  showModal() {
+    $('#modal1').openModal();
+  }
 
+  pasteEmoji(e) {
+    const emoji = $(e.target).attr('alt')
+    const updateText = $('#send-message').val() + emoji; 
+    $('#send-message').val(updateText);
+    $('#modal1').closeModal(); 
+  }
+
+  render() {
     this.displayMSG = [];
     this.state.messages.forEach((msg) => {
       msg.user === this.currentUser ? this.hideUser = true : this.hideUser = false;
@@ -146,17 +194,31 @@ export default class MessageApp extends React.Component {
     })
     this.currentUser = '';
 
+    const emojiStyle = {
+      bottom: '45px',
+      left: '24px',
+    };
+
   return (
-  <div>
+    <div>
+    <div id="modal1" className="modal">
+      <div className="modal-content">
+        <h4 className="center-align"><Twemoji>😎😎😎😎😎EMOJI😎😎😎😎😎</Twemoji></h4>
+        {this.state.emojis.map(emoji => {
+          return (<div className="col s1"><Twemoji onClick={this.pasteEmoji}>{this.decodeEmoji(emoji)}</Twemoji></div>)
+        })}
+      </div>
+    </div>
+              
     <div className="row">
       <div className="messenger card col s12">
         <nav className='activator'>
           <div className="nav-wrapper cyan">
-              <span className='card-title activator'><a className='contactsbtn right'><i className="material-icons">contacts</i></a></span>
+            <span className='card-title activator'><a className='contactsbtn right'><i className="material-icons">contacts</i></a></span>
           </div>
         </nav>
 
-       <div className="activator cardbody card-content grey lighten-4">
+      <div className="activator cardbody card-content grey lighten-4">
       <div className='no-margin card-content row'>
         <div className='cardbody'>
           <div className='messagebody'>
@@ -168,22 +230,22 @@ export default class MessageApp extends React.Component {
                     <div className={this.isThisMyPic(message.user)} hidden={message.hide}><img src='http://bit.ly/1PgP9cx'/></div>
                     <div className='username col s9' hidden={message.hide}><p className={this.isThisMyName(message.user)}>{message.user}</p></div>
                   </div>
-                  <div className={this.isThisMyText(message.user)}>{message.text}</div>
+                  <div className={this.isThisMyText(message.user)}><Twemoji>{message.text}</Twemoji></div>
                </div>
               )
             })}
-          </div>
-
+          </div> 
           <div className='card-action message inputfield col s12'>
-            <div className='profilepic col s2'><img src='http://bit.ly/1PgP9cx'/></div>
-            <form className='col s10' onSubmit={(e) => {this.sendMessage(e)}}>
-              <input className='' ref='inputfield'/>
+            <div className='profilepic col s5 m4 l3'>
+              <Twemoji onClick={this.showModal}>😎</Twemoji>
+            </div>
+            <form className='col s7 m8 l9' onSubmit={(e) => {this.sendMessage(e)}}>
+              <input id="send-message" className='' ref='inputfield'/>
             </form>
           </div>
-
-
         </div>
       </div>
+
       </div>
 
         <div className='card-reveal'>

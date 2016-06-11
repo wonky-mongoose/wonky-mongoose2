@@ -157,8 +157,9 @@ class Webcam extends Component {
   }
 
   componentWillReceiveProps(props) {
-    console.log('I GOT IT', props.user);
-    this.initConnection(`${props.user.name}.${props.user._id}`);
+    if(this.props.user.name){
+      this.initConnection(`${props.user.name}.${props.user._id}`);
+    }
   }
 
   render() {

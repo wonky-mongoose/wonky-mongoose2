@@ -38,10 +38,10 @@ export default class Canvas extends React.Component {
 
   updatePath(point) {
     const incomingColor = point.color;
-    console.log(incomingColor);
     const originalColor = this.stroke.color;
     this.path.strokeColor = incomingColor;
     this.path.add(point.point);
+    paper.view.update();
     // this.path.strokeColor = originalColor;
   }
 
