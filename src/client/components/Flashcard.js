@@ -48,7 +48,6 @@ class Flashcard extends React.Component {
         <div>
           <ul>
             {cards.map((card, idx) => <FlashcardEntry key={idx} card={card} deleteCard={this.props.deleteCard}/>)}
-
           </ul>
         </div>
       </div>
