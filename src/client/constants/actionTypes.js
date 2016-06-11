@@ -11,6 +11,7 @@ export const SIGN_OUT = 'SIGN_OUT';
 
 export const ERR_FAILED_REQUEST = 'ERR_FAILED_REQUEST';
 
-export const UPDATE_MESSAGE = 'update-message';
-export const ADD_MESSAGE = 'add-message';
-export const ADD_RESPONSE = 'add-response';
+export const CREATE_CARD = 'CREATE_CARD';
+export const CREATE_DECK = 'CREATE_DECK';
+export const RECEIVE_CARDS = 'RECEIVE_CARDS';
+export const REMOVE_DECK = 'REMOVE_DECK';
