@@ -179,6 +179,7 @@ export default class MessageApp extends React.Component {
     const updateText = $('#send-message').val() + emoji; 
     $('#send-message').val(updateText);
     $('#modal1').closeModal(); 
+    $('#send-message').trigger('focus');
   }
 
   render() {
