@@ -81,7 +81,7 @@ class DeckItem extends Component {
           </div>
           <div className="modal-footer">
             <a href="#!" className=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
-            <a href="#!" className=" modal-action modal-close waves-effect waves-green btn-flat">Yes</a>
+            <a href="#!" className=" modal-action modal-close waves-effect waves-green btn-flat" onClick={this.deleteDeck.bind(this)}>Yes</a>
             
           </div>
         </div>
