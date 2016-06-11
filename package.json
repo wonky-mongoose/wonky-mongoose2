@@ -3,6 +3,7 @@
   "version": "0.5.2",
   "description": "",
   "scripts": {
+    "start": "webpack --progress && babel src/server -d dev/server && npm run server-dev",
     "clean": "rm -rf dev dist",
     "build": "npm run build-server-prod && npm run build-client-prod",
     "build-client-prod": "HOST=127.0.0.1 PORT=3333 PROTOCOL=http NODE_ENV=production webpack --progress",

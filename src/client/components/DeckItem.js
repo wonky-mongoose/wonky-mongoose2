@@ -60,6 +60,7 @@ class DeckItem extends Component {
           <div className="card-panel hoverable">
             <div className="card-content">
               <i className="material-icons right" onClick={(e)=>{$('#modal1').openModal()}} href="#modal1" >delete</i>
+              <i className="material-icons right" onClick={this.getCards.bind(this)}>mode_edit</i>
               <div className="card-title grey-text text-darken-4 center">
                 <strong>{this.props.deck.name}</strong>
               </div>
@@ -68,9 +69,6 @@ class DeckItem extends Component {
               <div className="center">
                 <button onClick={this.chooseDeckToStudy} className="btn cyan lighten-3">
                   Study
-                </button>
-                <button onClick={this.getCards.bind(this)} className="btn orange lighten-3">
-                  get flashies
                 </button>
               </div>
             </div>
@@ -83,7 +81,7 @@ class DeckItem extends Component {
           </div>
           <div className="modal-footer">
             <a href="#!" className=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
-            <a href="#!" className=" modal-action modal-close waves-effect waves-green btn-flat">Yes</a>
+            <a href="#!" className=" modal-action modal-close waves-effect waves-green btn-flat" onClick={this.deleteDeck.bind(this)}>Yes</a>
             
           </div>
         </div>
