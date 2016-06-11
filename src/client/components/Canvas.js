@@ -8,6 +8,7 @@ export default class Canvas extends React.Component {
   constructor(props) {
     super(props);
     this.connection = io.connect();
+    this.connection.emit('room', this.props.location.pathname);
     this.path = null;
     this.isMouseDown = false;
     var updateP = throttle((this.updatePath).bind(this), 25);
@@ -25,10 +26,14 @@ export default class Canvas extends React.Component {
       width: '3',
     };
     this.changeColor = this.changeColor.bind(this);
+
+    this.connection.on('canvas history', (data) => {
+      console.log('canvas', data);
+    })
   }
 
   emitPath(e) {
-    this.connection.emit('updatePath', { x: e.point.x, y: e.point.y+30, color: this.stroke.color });
+    this.connection.emit('updatePath', { x: e.point.x, y: e.point.y, color: this.stroke.color, classroom: this.props.location.pathname });
   }
 
   updatePath(point) {

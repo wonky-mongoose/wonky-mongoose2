@@ -9,7 +9,7 @@ export default class MessageApp extends React.Component {
   	super(props);
     this.socket = io.connect();
   	this.socket.on('chat message', this.recieveMessage.bind(this));
-    
+
     this.getUsers = this.getUsers.bind(this);
     this.msgPic;
     this.msgName;
@@ -17,6 +17,7 @@ export default class MessageApp extends React.Component {
     this.isThisMyName = this.isThisMyName.bind(this);
     this.isThisMyText = this.isThisMyText.bind(this);
     this.scrollToBottom = this.scrollToBottom.bind(this);
+    this.users = {};
 
   	this.state = {
   	  messages: [],
@@ -42,13 +43,68 @@ export default class MessageApp extends React.Component {
         "👟", "👒", "🎩", "⛑", "🎓", "👑", "🎒", "👝", "👛", "👜", "💼",
         "👓", "🕶", "💍", "🌂"],
   	}
-    this.displayMSG = [];
-    console.log('props', props.location)
-    console.log('this props', this.props)
 
+    
+    this.displayMSG = [];
+
+
+    this.socket.emit('room', this.props.location.pathname);
+    // this.socket.on('chat history', this.recieveHistory.bind(this));
+
+    console.log('props', props.location)
+    console.log('this props', this.props.user['name'])
+
+    this.socket.on('chat history', (data) => {
+      console.log('History', data);
+      data !== null ? this.state.messages = data : data;
+    })
   };
 
   componentWillMount() {
+    if( this.props.user['name'] !== null ) {
+      this.socket.emit('user', this.props.user['name']);
+      this.socket.on('user', (users) => {
+        users.forEach((user) => {
+          console.log(user);
+          user!== null ? this.users[user] = 1 : user;
+          this.setState({
+            users: Object.keys(this.users)
+          })
+          console.log('users', this.state.users)
+        })
+      })
+    }
+
+    // this.getUsers().then(users => {
+    //   //console.log('users', props.location.pathname);
+    //   this.setState({
+    //     users: users
+    //   })
+    // });
+  };
+
+  componentWillReceiveProps() {
+    if( this.props.user['name'] !== null ) {
+      this.socket.emit('user', this.props.user['name']);
+      this.socket.on('user', (users) => {
+        users.forEach((user) => {
+          console.log(user)
+          user!== null ? this.users[user] = 1 : user;
+          this.setState({
+            users: Object.keys(this.users)
+          })
+          console.log('users',this.state.users)
+        })
+      })
+    }
+  }
+
+  recieveHistory(messages) {
+    this.setState({
+      messages: messages
+    });
+    console.log('history', messages)
+    this.scrollToBottom();
     this.getUsers().then(users => {
       //console.log('users', props.location.pathname);
       this.setState({
@@ -81,7 +137,7 @@ export default class MessageApp extends React.Component {
       this.socket.emit('chat message', {
         user: this.props.user.name, 
         text: this.refs.inputfield.value, 
-        classroom: this.props.location
+        classroom: this.props.location.pathname
       });
       this.refs.inputfield.value = '';
     }
@@ -89,8 +145,8 @@ export default class MessageApp extends React.Component {
   };
 
   getUsers() {
-    return fetch('/api/allusers')
-      .then(response => response.json());
+    // return fetch('/api/allusers')
+    //   .then(response => response.json());
   }
 
   isThisMyPic(name) {
@@ -198,8 +254,8 @@ export default class MessageApp extends React.Component {
             {this.state.users.map((user) => {
               return (
                 <li id='classmate' className="collection-item avatar">
-                  <img src="http://bit.ly/1PgP9cx" alt="" className="circle" />
-                  <span className="title">{user.name}</span>
+                  <img src="http://bit.ly/1PgP9cx" alt="" className="circle"/>
+                  <span className="title">{user}</span>
                 </li>
               )
             })}
