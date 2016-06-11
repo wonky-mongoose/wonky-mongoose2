@@ -8,7 +8,7 @@ import twilio from '../controllers/Twilio';
 import AllUsers from '../controllers/AllUsers';
 import createDeck from '../controllers/CreateDeck';
 import createCard from '../controllers/CreateCard';
-
+import cards from '../controllers/Cards';
 
 const router = new Router();
 
@@ -17,6 +17,7 @@ const router = new Router();
  */
 router.route('/api/decks').get(auth.checkAuthServer, decks.findAll);
 router.route('/api/card').post(auth.checkAuthServer, decks.findNextCard);
+router.route('/api/card/:cardId').delete(auth.checkAuthServer, cards.deleteCard);
 router.route('/api/progress').post(auth.checkAuthServer, decks.progress);
 router.route('/api/decks/:deckId').delete(auth.checkAuthServer, decks.deleteDeck);
 router.route('/api/decks/:deckId/flashcards').get(auth.checkAuthServer, decks.getFlashcards);

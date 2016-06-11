@@ -72,9 +72,6 @@ class DeckItem extends Component {
                 <button onClick={this.getCards.bind(this)} className="btn orange lighten-3">
                   get flashies
                 </button>
-                <button onClick={this.deleteDeck.bind(this)} className="btn orange lighten-3">
-                  Delete
-                </button>
               </div>
             </div>
           </div>
