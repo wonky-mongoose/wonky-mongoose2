@@ -228,7 +228,7 @@ export default class MessageApp extends React.Component {
                 <div className='message col s12'>
                   <div className='message-whitespace' hidden={message.hide}></div>
                   <div className='message-details' hidden={message.hide}>
-                    <div className={this.isThisMyPic(message.user)} hidden={message.hide}><img src='http://bit.ly/1PgP9cx'/></div>
+                    <div className={this.isThisMyPic(message.user)} hidden={message.hide}><img className='face' src='http://bit.ly/1PgP9cx'/></div>
                     <div className='username col s9' hidden={message.hide}><p className={this.isThisMyName(message.user)}>{message.user}</p></div>
                   </div>
                   <div className={this.isThisMyText(message.user)}><Twemoji>{message.text}</Twemoji></div>
