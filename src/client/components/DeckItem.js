@@ -8,7 +8,6 @@ import DeckLastPlayed from './DeckLastPlayed';
 const mapDispatchToState = (dispatch) => ({
   setDeckState: (deck) => dispatch(selectDeck(deck)),
   deleteDeck: (deckId) => dispatch(deleteDeck(deckId)),
-  getFlashcards: (deckId) => {console.log('THIS IS DECKID', deckId); dispatch(getFlashcards(deckId))}
 });
 const mapStateToProps = ({ decks, user, cards }) => ({ decks, user, cards });
 
@@ -45,8 +44,9 @@ class DeckItem extends Component {
   }
 
   getCards() {
-    this.props.getFlashcards(this.props.deck._id);
+    // this.props.getFlashcards(this.props.deck._id);
     console.log('flashies has been clicked!!!', );
+    browserHistory.push(`/flash/decks/${this.props.deck._id}/flashcards`);
   }
 
 

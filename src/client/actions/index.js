@@ -73,6 +73,7 @@ export const savePlay = (play, rating) => {
   );
 };
 
+export const createDeck = card => ({ type: types.CREATE_DECK, data: card });
 export const postDeck = (name, userId) => {
   const payload = JSON.stringify({ name, userId });
   return dispatch => (
@@ -85,7 +86,8 @@ export const postDeck = (name, userId) => {
       credentials: 'same-origin',
       body: payload,
     })
-    .then(result => console.log('successfully posted', result))
+    .then(res => res.json())
+    .then(decks => dispatch(createDeck(decks)))
     .catch(err => dispatch(failedRequest(err)))
   );
 }

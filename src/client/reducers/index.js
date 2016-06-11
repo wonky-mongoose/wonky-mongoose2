@@ -9,6 +9,7 @@ import {
   SIGN_OUT,
   ERR_FAILED_REQUEST,
   RECEIVE_CARDS,
+  CREATE_DECK,
 } from '../constants/actionTypes';
 
 import {
@@ -20,6 +21,9 @@ export const decks = (state, action) => {
   switch (action.type) {
     case RECEIVE_DECKS: {
       return action.data || state;
+    }
+    case CREATE_DECK: {
+      return state.concat([action.data]); 
     }
     default:
       return state || [];

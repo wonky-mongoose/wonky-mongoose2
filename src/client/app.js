@@ -63,7 +63,7 @@ render(
         <IndexRoute component={Menu} onEnter={isAuthorized} />
         <Route path="/flash" component={Splash} onEnter={isAuthorized} />
         <Route path="/flash/dashboard" component={Dashboard} onEnter={isAuthorized} />
-        <Route path="/flash/dashboard/flashcard" component={CreateCard} onEnter={isAuthorized} />
+        <Route path="/flash/decks/:deckId/flashcards" component={CreateCard} onEnter={isAuthorized} />
 
         <Route path="/flash/decks/:deckId/study" component={StudyDeck} onEnter={isAuthorized} />
 

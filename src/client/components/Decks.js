@@ -12,7 +12,7 @@ export default class Decks extends React.Component {
     event.preventDefault();
     this.props.postDeck(this.refs.name.value, this.props.user._id);
   }
-   
+  
   render () {  
     return (
       <div className="container">
