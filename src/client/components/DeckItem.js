@@ -59,7 +59,7 @@ class DeckItem extends Component {
         <div className="card-item">
           <div className="card-panel hoverable">
             <div className="card-content">
-              <i className="material-icons" onClick={(e)=>{$('#modal1').openModal()}} href="#modal1" >delete</i>
+              <i className="material-icons right" onClick={(e)=>{$('#modal1').openModal()}} href="#modal1" >delete</i>
               <div className="card-title grey-text text-darken-4 center">
                 <strong>{this.props.deck.name}</strong>
               </div>
