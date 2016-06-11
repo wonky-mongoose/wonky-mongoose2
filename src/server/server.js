@@ -35,6 +35,7 @@ app
   .use(bodyParser.json())
   .use(cookieParser())
   .use(express.static(resolve(__dirname, '../')))
+  .use(express.static(resolve(__dirname, '../../src/client/assets')))
   .use(session({
     secret: 'wonky',
     resave: false,

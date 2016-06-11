@@ -11,6 +11,10 @@ html {
   font-family: Montserrat, Avenir, sans-serif;
 }
 
+.clickable-card {
+  cursor: pointer;
+}
+
 .no-side-padding {
   padding-left: 0 !important;
   padding-right: 0 !important;
@@ -21,7 +25,7 @@ html {
 
 video {
   width: 100%;
-  box-shadow:0 12px 15px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19)
+  box-shadow:0 12px 15px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 .message-card {
