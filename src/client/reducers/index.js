@@ -9,6 +9,8 @@ import {
   SIGN_OUT,
   ERR_FAILED_REQUEST,
   RECEIVE_CARDS,
+  CREATE_DECK,
+  REMOVE_DECK,
 } from '../constants/actionTypes';
 
 import {
@@ -20,6 +22,14 @@ export const decks = (state, action) => {
   switch (action.type) {
     case RECEIVE_DECKS: {
       return action.data || state;
+    }
+    case CREATE_DECK: {
+      console.log("HODORRRR",action.data);
+      return state.concat([action.data]); 
+    }
+    case REMOVE_DECK: {
+    console.log("DELETE DECK",action.data);
+    return state.delete([action.data]); 
     }
     default:
       return state || [];
@@ -50,6 +60,10 @@ export const cards = (state, action) => {
   switch (action.type) {
     case RECEIVE_CARDS: {
       return action.data || state;
+    }
+    case CREATE_DECK: {
+      console.log("HODORRRR",action.data);
+      return state.concat([action.data]); 
     }
     default:
       return state || {};
