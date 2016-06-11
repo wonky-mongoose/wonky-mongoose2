@@ -48,18 +48,37 @@ app
   
 server.listen(port);
 
-io.on('connection', function(socket){
+let roomname;
+let storageMSG = {};
+let storagePoint = {};
+let members = {};
+
+io.on('connection', (socket) => {
   console.log('a user connected');
   socket.emit('connect');
-  socket.on('updatePath', function(point){
-    io.emit('updatePath', point);
+  socket.on('room', (room) => {
+    roomname = room;
+    //console.log('roomname', roomname)
+    socket.join(roomname);
+    io.to(roomname).emit('chat history', storageMSG[roomname])
+    io.to(roomname).emit('canvas history', storagePoint[roomname])
+  })
+  socket.on('user', (user) => {
+    members[roomname] ? members[roomname].push(user) : members[roomname] = [user];
+    socket.emit('user', members[roomname])
+  })
+  socket.on('updatePath', (point) => {
+    io.to(roomname).emit('updatePath', point);
+    storagePoint[point.classroom] ? storagePoint[point.classroom].push(point) : storagePoint[point.classroom] = [point];
+    console.log('point', storagePoint)  
   });
-  socket.on('chat message', function(msg){
-   console.log('msg', msg)
-   io.emit('chat message', msg);
- });
+  socket.on('chat message', (msg) => {
+    //console.log('chat msg', msg)
+    storageMSG[msg.classroom] ? storageMSG[msg.classroom].push(msg) : storageMSG[msg.classroom] = [msg];
+   // console.log('storageMSG', storageMSG);
+    io.to(roomname).emit('chat message', msg);
+  });
 });
-
 
 // io.on('updatePath', function(point){
 //   console.log('updating path');
