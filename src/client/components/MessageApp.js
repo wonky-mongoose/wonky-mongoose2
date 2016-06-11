@@ -10,7 +10,6 @@ export default class MessageApp extends React.Component {
     this.socket = io.connect();
   	this.socket.on('chat message', this.recieveMessage.bind(this));
     
-    this.users = [];
     this.getUsers = this.getUsers.bind(this);
     this.msgPic;
     this.msgName;
@@ -20,21 +19,26 @@ export default class MessageApp extends React.Component {
     this.scrollToBottom = this.scrollToBottom.bind(this);
 
   	this.state = {
-  	  messages: []
+  	  messages: [],
+      users: []
   	}
     this.displayMSG = [];
 
-    console.log('alex?', this.props.user)
+    console.log('props', props.location)
+    console.log('this props', this.props)
+
   };
 
   componentWillMount() {
-      console.log(this.users)
-      this.getUsers();
-
+      this.getUsers().then(users => {
+        //console.log('users', props.location.pathname);
+        this.setState({
+          users: users
+        })
+      });
   };
 
   recieveMessage(message) {
-  	console.log(this.state)
   	let messages = this.state.messages;
   	this.setState({
   	  messages: messages.concat(message)
@@ -43,21 +47,21 @@ export default class MessageApp extends React.Component {
   };
 
   sendMessage(e) {
-  if ( this.refs.inputfield.value !== '' ) {
-    this.socket.emit('chat message', {user: this.props.user.name, text: this.refs.inputfield.value});
-    this.refs.inputfield.value = '';
-  }
-  e.preventDefault();     
+    //console.log('location', this.props.location)
+    if ( this.refs.inputfield.value !== '' ) {
+      this.socket.emit('chat message', {
+        user: this.props.user.name, 
+        text: this.refs.inputfield.value, 
+        classroom: this.props.location
+      });
+      this.refs.inputfield.value = '';
+    }
+    e.preventDefault();     
   };
 
   getUsers() {
-    fetch('/api/allusers')
-      .then(response => response.json())
-      .then(user => {
-        this.users.push(user);
-        console.log(this.users);
-      })
-
+    return fetch('/api/allusers')
+      .then(response => response.json());
   }
 
   isThisMyPic(name) {
@@ -136,8 +140,17 @@ export default class MessageApp extends React.Component {
       </div>
 
         <div className='card-reveal'>
-          <span className='card-title'>Classmates<i className="material-icons right">close</i></span>
-          {JSON.stringify(this.users)}
+          <span className='card-title'>Classmates<i className="material-icons right">close</i></span>       
+          <ul id='classmates' className="collection">
+            {this.state.users.map((user) => {
+              return (
+                <li id='classmate' className="collection-item avatar">
+                  <img src="http://bit.ly/1PgP9cx" alt="" className="circle"/>
+                  <span className="title">{user.name}</span>
+                </li>
+              )
+            })}
+          </ul>
         </div>
       </div>
     </div>
