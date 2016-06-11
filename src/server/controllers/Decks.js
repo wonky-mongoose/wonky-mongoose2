@@ -1,5 +1,4 @@
 import Deck from '../models/Deck';
-import Card from '../models/Card';
 import getCard from '../services/DeckProgress';
 import getProgress from '../services/ProgressBar.js';
 
@@ -52,4 +51,4 @@ const getFlashcards = (req, res) => {
   });
 };
 
-export default { findAll, findNextCard, progress, deleteDeck, getFlashcards };
+export default { findAll, findNextCard, progress, deleteDeck, getFlashcards};

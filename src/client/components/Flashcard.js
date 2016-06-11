@@ -6,7 +6,8 @@ import FlashcardEntry from './FlashcardEntry';
 
 class Flashcard extends React.Component {
   constructor(props) {
-    super(props);    
+    super(props);  
+    console.log('props inside flashcard!!!', props);  
   };
 
   handleSubmit (event) {
@@ -27,6 +28,7 @@ class Flashcard extends React.Component {
   }
 
 
+
   render() {
    if(Array.isArray(this.props.cards)) {
         var cards = this.props.cards;
@@ -45,7 +47,8 @@ class Flashcard extends React.Component {
         </form>
         <div>
           <ul>
-            {cards.map((card, idx) => <FlashcardEntry key={idx} card={card} />)}
+            {cards.map((card, idx) => <FlashcardEntry key={idx} card={card} deleteCard={this.props.deleteCard}/>)}
+
           </ul>
         </div>
       </div>
