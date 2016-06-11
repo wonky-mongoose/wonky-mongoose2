@@ -46,6 +46,8 @@ export default class Canvas extends React.Component {
     // myCanvas.height = 400;
     paper.setup(myCanvas);
     this.path = new Path();
+    this.path.strokeWidth = '3';
+    this.path.strokeColor = 'black';
 
     paper.project.view.onMouseDown = ((e) => {
       this.isMouseDown = true;
@@ -69,7 +71,13 @@ export default class Canvas extends React.Component {
   changeColor(color) {
     this.path = new Path();
     this.stroke.color = color;
-    this.stroke.width = color === 'white' ? '50' : '3';
+    if(color === 'white'){
+      this.stroke.width = '50';
+      $('#myCanvas').css({ cursor: 'url(/images/eraser.png), default' });
+    } else {
+      this.stroke.width = '3';
+      $('#myCanvas').css({ cursor: 'url(/images/pen.png), default' });
+    }
     this.path.strokeColor = this.stroke.color;
     this.path.strokeWidth = this.stroke.width;
   }
