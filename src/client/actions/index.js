@@ -92,7 +92,7 @@ export const postDeck = (name, userId) => {
   );
 }
 
-
+export const createCard = cards => ({ type: types.CREATE_CARD, data: cards });
 export const postCard = (question, explanation, text, deckId, userId) => {
   const payload = JSON.stringify({ question, explanation, text, deckId, userId });
   return dispatch => (
@@ -105,7 +105,8 @@ export const postCard = (question, explanation, text, deckId, userId) => {
       credentials: 'same-origin',
       body: payload,
     })
-    .then(result => console.log('successfully posted my result!!!POSTCARD', result))
+    .then(res => res.json())
+    .then(cards => dispatch(createCard(cards)))
     .catch(err => dispatch(failedRequest(err)))
   );
 }

@@ -15,4 +15,3 @@ export const CREATE_CARD = 'CREATE_CARD';
 export const CREATE_DECK = 'CREATE_DECK';
 export const RECEIVE_CARDS = 'RECEIVE_CARDS';
 export const REMOVE_DECK = 'REMOVE_DECK';
-export const RECEIVE_NEWCARDS = 'RECEIVE_NEWCARDS';

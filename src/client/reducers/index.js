@@ -11,6 +11,7 @@ import {
   RECEIVE_CARDS,
   CREATE_DECK,
   REMOVE_DECK,
+  CREATE_CARD,
 } from '../constants/actionTypes';
 
 import {
@@ -60,6 +61,9 @@ export const cards = (state, action) => {
   switch (action.type) {
     case RECEIVE_CARDS: {
       return action.data || state;
+    }
+    case CREATE_CARD: {
+      return state.concat([action.data]); 
     }
     default:
       return state || {};
