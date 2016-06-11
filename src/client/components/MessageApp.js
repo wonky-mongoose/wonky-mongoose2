@@ -236,12 +236,12 @@ export default class MessageApp extends React.Component {
             })}
           </div> 
           <div className='card-action message inputfield col s12'>
-            <div className='profilepic col s5 m4 l3'>
-              <Twemoji onClick={this.showModal}>😎</Twemoji>
-            </div>
             <form className='col s7 m8 l9' onSubmit={(e) => {this.sendMessage(e)}}>
               <input id="send-message" className='' ref='inputfield'/>
             </form>
+            <div className='profilepic col s5 m4 l3'>
+              <Twemoji onClick={this.showModal}>😎</Twemoji>
+            </div>
           </div>
         </div>
       </div>
