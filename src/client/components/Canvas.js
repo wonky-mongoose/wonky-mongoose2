@@ -29,6 +29,12 @@ export default class Canvas extends React.Component {
 
     this.connection.on('canvas history', (data) => {
       console.log('canvas', data);
+      data.forEach((historyPoint) => {
+        this.updatePath({
+          point: new Point(historyPoint.x, historyPoint.y),
+          color: historyPoint.color
+        })
+      })
     })
   }
 
