@@ -92,8 +92,9 @@ export const postDeck = (name, userId) => {
   );
 }
 
-export const postCard = (question, answer, deckId, userId) => {
-  const payload = JSON.stringify({ question, answer, deckId, userId });
+export const createCard = cards => ({ type: types.CREATE_CARD, data: cards });
+export const postCard = (question, explanation, text, deckId, userId) => {
+  const payload = JSON.stringify({ question, explanation, text, deckId, userId });
   return dispatch => (
     fetch(`${url}/api/createcard`, {
       method: 'POST',
@@ -104,11 +105,13 @@ export const postCard = (question, answer, deckId, userId) => {
       credentials: 'same-origin',
       body: payload,
     })
-    .then(result => console.log('successfully posted', result))
+    .then(res => res.json())
+    .then(cards => dispatch(createCard(cards)))
     .catch(err => dispatch(failedRequest(err)))
   );
 }
 
+export const removeDeck = deck => ({ type: types.REMOVE_DECK, data: deck });
 export const deleteDeck = (deckId) => {
   const payload = JSON.stringify({ deckId });
   return dispatch => (
@@ -121,7 +124,7 @@ export const deleteDeck = (deckId) => {
       credentials: 'same-origin',
       body: payload,
     })
-    .then(result => console.log('successfully deleted', result))
+    .then(deckId => dispatch(removeDeck(deckId)))
     .catch(err => dispatch(failedRequest(err)))
   );
 }

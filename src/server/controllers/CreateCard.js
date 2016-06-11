@@ -1,9 +1,15 @@
 import Card from '../models/Card';
 
 const post = (req, res) => {
+  console.log('I  M INSIDE CREATE CARD', req.body);
   Card.create({
-    question: req.body.question,
-    answer: req.body.answer,
+    question: {
+      text: req.body.question
+    },
+    answer: {
+      text: req.body.text,
+      explanation: req.body.explanation
+    },
     deckId: req.body.deckId,
     userId: req.user._id,
   })

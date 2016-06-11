@@ -10,6 +10,8 @@ import {
   ERR_FAILED_REQUEST,
   RECEIVE_CARDS,
   CREATE_DECK,
+  REMOVE_DECK,
+  CREATE_CARD,
 } from '../constants/actionTypes';
 
 import {
@@ -24,6 +26,11 @@ export const decks = (state, action) => {
     }
     case CREATE_DECK: {
       return state.concat([action.data]); 
+    }
+    case REMOVE_DECK: {
+      console.log('remove', state);
+      console.log('remove action', action.data);
+      return state; 
     }
     default:
       return state || [];
@@ -54,6 +61,9 @@ export const cards = (state, action) => {
   switch (action.type) {
     case RECEIVE_CARDS: {
       return action.data || state;
+    }
+    case CREATE_CARD: {
+      return state.concat([action.data]); 
     }
     default:
       return state || {};

@@ -4,15 +4,16 @@ export default class FlashcardEntry extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log('inside flashentry works', props);
+    console.log('inside flashentry', props);
   }
 
   render() {
     return (
       <div>
         <li>
-         <div>{this.props.card.answer.explanation}</div>
-         <div>{this.props.card.question.text}</div>
+         <div>Question: {this.props.card.answer.explanation}</div>
+         <div>Answer: {this.props.card.answer.text}</div>
+         <div>Explanation: {this.props.card.question.text}</div>
         </li>
       </div>
     );
