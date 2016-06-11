@@ -1,5 +1,6 @@
 import React from 'react';
 import paper, { Path, PaperScope, Color, Point} from 'paper';
+import Pallete from './Pallete';
 import { throttle } from 'underscore';
 import io from 'socket.io-client';
 
@@ -8,26 +9,35 @@ export default class Canvas extends React.Component {
     super(props);
     this.connection = io.connect();
     this.path = null;
-    this.stroke = {
-      color: 'black',
-      width: 3
-    }
     this.isMouseDown = false;
     var updateP = throttle((this.updatePath).bind(this), 25);
     this.connection.on('connect', ((sock) => {
       console.log('connected!');
       this.connection.on('updatePath', (point) => {
-        updateP(new Point(point.x, point.y));
+        updateP({
+          point: new Point(point.x, point.y),
+          color: point.color,
+        });
       })
     }).bind(this));
+    this.stroke = {
+      color: 'black',
+      width: '3',
+    };
+    this.changeColor = this.changeColor.bind(this);
   }
 
   emitPath(e) {
-    this.connection.emit('updatePath', {x : e.point.x, y: e.point.y});
+    this.connection.emit('updatePath', { x: e.point.x, y: e.point.y, color: this.stroke.color });
   }
 
   updatePath(point) {
-    this.path.add(point);
+    const incomingColor = point.color;
+    console.log(incomingColor);
+    const originalColor = this.stroke.color;
+    this.path.strokeColor = incomingColor;
+    this.path.add(point.point);
+    // this.path.strokeColor = originalColor;
   }
 
   componentDidMount() {
@@ -36,8 +46,7 @@ export default class Canvas extends React.Component {
     // myCanvas.height = 400;
     paper.setup(myCanvas);
     this.path = new Path();
-    this.path.strokeColor = this.stroke.color;
-    this.path.strokeWidth = this.stroke.width;
+
     paper.project.view.onMouseDown = ((e) => {
       this.isMouseDown = true;
       this.emitPath(e);
@@ -46,8 +55,6 @@ export default class Canvas extends React.Component {
     paper.project.view.onMouseUp = ((e) => {
       this.isMouseDown = false;
       this.path = new Path();
-      this.path.strokeColor = this.stroke.color;
-      this.path.strokeWidth = this.stroke.width;
     }).bind(this);
 
     paper.project.view.onMouseMove = ((e) => {
@@ -59,18 +66,10 @@ export default class Canvas extends React.Component {
     paper.view.draw();
   }
 
-  onClickDraw() {
+  changeColor(color) {
     this.path = new Path();
-    this.stroke.color = 'black';
-    this.stroke.width = '3';
-    this.path.strokeColor = this.stroke.color;
-    this.path.strokeWidth = this.stroke.width;
-  }
-
-  onClickErase() {
-    this.path = new Path();
-    this.stroke.color = 'white';
-    this.stroke.width = '30';
+    this.stroke.color = color;
+    this.stroke.width = color === 'white' ? '50' : '3';
     this.path.strokeColor = this.stroke.color;
     this.path.strokeWidth = this.stroke.width;
   }
@@ -79,8 +78,7 @@ export default class Canvas extends React.Component {
     return (
       <div>
         <div>
-          <button onClick={this.onClickDraw.bind(this)} className="draw-btn waves-effect waves-light btn" >Draw</button>
-          <button onClick={this.onClickErase.bind(this)} className="erase-btn waves-effect waves-light btn" >Erase</button>
+          <Pallete changeColor={this.changeColor} />
         </div>
         <div><canvas className='card' id='myCanvas' resize='true'></canvas></div>
       </div>

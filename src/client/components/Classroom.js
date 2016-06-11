@@ -1,10 +1,27 @@
+/* global Materialize */
 import React from 'react';
 import { browserHistory } from 'react-router';
+import fetch from 'isomorphic-fetch';
 
 const handleSubmit = e => {
   e.preventDefault();
+
   const room = document.getElementById('room_id').value;
-  browserHistory.push(`/classroom/room/${room}`);
+  fetch(`/api/checkroom?room=${room}`, { credentials: 'same-origin' })
+    .then(response => response.json())
+    .then(data => {
+      if (data.doesExist) {
+        Materialize.toast(`Entered ${room}.`, 3000);
+        browserHistory.push(`/classroom/room/${room}`);
+      } else {
+        Materialize.toast(`Room ${room} doesn't exist!`, 3000);
+      }
+    });
+};
+
+const createRoom = () => {
+  Materialize.toast('Created Room!', 3000);
+  browserHistory.push(`/classroom/room/${(Date.parse(new Date())).toString()}`);
 };
 
 const Classroom = () => (
@@ -16,7 +33,7 @@ const Classroom = () => (
         <div className="col s12 no-side-padding">
           <div
             className="card cyan lighten-5 hoverable"
-            onClick={() => browserHistory.push('/classroom/create')}
+            onClick={createRoom}
           >
             <div className="card-content">
               <span className="card-title">Create Room</span>
