@@ -22,11 +22,6 @@ class Flashcard extends React.Component {
     this.props.getFlashcards(this.props.params.deckId);
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //  this.props.cards = nextProps.props.cards;
-  //  this.render();
-  // }
-
   render() {
     if(Array.isArray(this.props.cards)) {
        var cards = this.props.cards;
