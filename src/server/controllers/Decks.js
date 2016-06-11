@@ -1,7 +1,7 @@
 import Deck from '../models/Deck';
-import Card from '../models/Card';
 import getCard from '../services/DeckProgress';
 import getProgress from '../services/ProgressBar.js';
+import Card from '../models/Card';
 
 const findAll = (req, res) => {
   Deck.find({}).then((decks) => {
@@ -52,4 +52,4 @@ const getFlashcards = (req, res) => {
   });
 };
 
-export default { findAll, findNextCard, progress, deleteDeck, getFlashcards };
+export default { findAll, findNextCard, progress, deleteDeck, getFlashcards};

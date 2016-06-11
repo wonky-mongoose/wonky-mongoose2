@@ -46,6 +46,11 @@ video {
     height: 40px;
     width: 40px;
   } 
+  .face {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+  } 
 }
 
 li {
@@ -197,4 +202,7 @@ div.card-reveal{
   }	
 }
 
+.list-spacing:not(:first-child) {
+  margin-top: 25px;
+}
 

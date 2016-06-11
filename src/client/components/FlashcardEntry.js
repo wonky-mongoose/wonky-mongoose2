@@ -6,11 +6,17 @@ export default class FlashcardEntry extends React.Component {
 
     console.log('inside flashentry', props);
   }
-
+  deleteCard() {
+    this.props.deleteCard(this.props.card._id);
+    console.log('HERE IS MY ID FOR CARD', this.props.card._id)
+  }
   render() {
     return (
       <div>
-        <li>
+        <button onClick={this.deleteCard.bind(this)} className="btn orange lighten-3">
+        Delete
+        </button>
+        <li className='card grey lighten-3 list-spacing'>
          <div>Question: {this.props.card.answer.explanation}</div>
          <div>Answer: {this.props.card.answer.text}</div>
          <div>Explanation: {this.props.card.question.text}</div>

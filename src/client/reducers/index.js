@@ -12,6 +12,7 @@ import {
   CREATE_DECK,
   REMOVE_DECK,
   CREATE_CARD,
+  REMOVE_CARD,
 } from '../constants/actionTypes';
 
 import {
@@ -52,6 +53,11 @@ export const card = (state, action) => {
     case RECEIVE_CARD: {
       return action.data || state;
     }
+    case REMOVE_CARD: {
+      console.log('remove', state);
+      console.log('remove action', action.data);
+      return state; 
+    }
     default:
       return state || {};
   }
@@ -64,6 +70,11 @@ export const cards = (state, action) => {
     }
     case CREATE_CARD: {
       return state.concat([action.data]); 
+    }
+    case REMOVE_CARD: {
+      console.log('remove', state);
+      console.log('remove action', action.data);
+      return state; 
     }
     default:
       return state || {};
