@@ -164,3 +164,21 @@ export const deleteCard = (cardId) => {
     .catch(err => dispatch(failedRequest(err)))
   );
 }
+
+export const getCard = card => { console.log('THESE ARE get CARDS', card); return { type: types.GET_CARD, data: card }};
+export const selectCard = (cardId) => {
+  const payload = JSON.stringify({ cardId });
+  return dispatch => (
+    fetch(`${url}/api/card/${cardId}`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        'Content-length': payload.length,
+      },
+      credentials: 'same-origin',
+      body: payload,
+    })
+    .then(cardId => dispatch(getCard(cardId)))
+    .catch(err => dispatch(failedRequest(err)))
+  );
+}

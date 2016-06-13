@@ -16,3 +16,4 @@ export const CREATE_DECK = 'CREATE_DECK';
 export const RECEIVE_CARDS = 'RECEIVE_CARDS';
 export const REMOVE_DECK = 'REMOVE_DECK';
 export const REMOVE_CARD = 'REMOVE_CARD';
+export const GET_CARD = 'GET_CARD';

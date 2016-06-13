@@ -21,6 +21,7 @@ router.route('/api/card/:cardId').delete(auth.checkAuthServer, cards.deleteCard)
 router.route('/api/progress').post(auth.checkAuthServer, decks.progress);
 router.route('/api/decks/:deckId').delete(auth.checkAuthServer, decks.deleteDeck);
 router.route('/api/decks/:deckId/flashcards').get(auth.checkAuthServer, decks.getFlashcards);
+router.route('/api/card/:cardId').get(auth.checkAuthServer, cards.selectCard);
 
 
 /*

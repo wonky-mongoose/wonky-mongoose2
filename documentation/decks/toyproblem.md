@@ -15,7 +15,7 @@ Decision: divisor would be less than Math.sqrt (n)"
 ---
 ## Card 
 ### Question
-"Count Total number of zeros from 1 upto n?"
+"Count total number of zeros from 1 up to n?"
 ### Answer
 "If n = 50. number of 0 would be 11 (0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100). Please note that 100 has two 0.",
 ### Explanation

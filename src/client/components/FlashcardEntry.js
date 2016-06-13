@@ -17,9 +17,9 @@ export default class FlashcardEntry extends React.Component {
         Delete
         </button>
         <li className='card grey lighten-3 list-spacing'>
-         <div>Question: {this.props.card.answer.explanation}</div>
-         <div>Answer: {this.props.card.answer.text}</div>
-         <div>Explanation: {this.props.card.question.text}</div>
+         <div>Question: {this.props.card.answer.explanation.slice(1, -1)}</div>
+         <div>Answer: {this.props.card.answer.text.slice(1, -1)}</div>
+         <div>Explanation: {this.props.card.question.text.slice(1, -1)}</div>
         </li>
       </div>
     );

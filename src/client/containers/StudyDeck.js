@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import StudyDeck from '../components/StudyDeck';
 import { fetchCard, startPlay, flipCard, savePlay } from '../actions';
 
-const mapStateToProps = ({ deck, card, play }) => ({ deck, card, play });
+const mapStateToProps = ({ deck, card, play, cards }) => ({ deck, card, play, cards });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCard: (deck) => dispatch(fetchCard(deck)),

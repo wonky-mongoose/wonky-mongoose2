@@ -13,6 +13,7 @@ import {
   REMOVE_DECK,
   CREATE_CARD,
   REMOVE_CARD,
+  GET_CARD,
 } from '../constants/actionTypes';
 
 import {
@@ -57,6 +58,9 @@ export const card = (state, action) => {
       console.log('remove', state);
       console.log('remove action', action.data);
       return state; 
+    }
+    case GET_CARD: {
+      return state.concat([action.data]); 
     }
     default:
       return state || {};
