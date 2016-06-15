@@ -29,6 +29,7 @@ import Room from './components/Room';
 import CreateCard from './containers/CreateCard';
 import SelectCard from './containers/SelectCard';
 import { verifyAuthentication, fetchDecks } from './actions';
+import SearchTopic from './components/SearchTopic';
 
 // services
 import Auth from './services/AuthService';
@@ -66,19 +67,15 @@ render(
         <Route path="/flash/dashboard" component={Dashboard} onEnter={isAuthorized} />
         <Route path="/flash/decks/:deckId/flashcards" component={CreateCard} onEnter={isAuthorized} />
         <Route path="/classroom/room/1465786194000/:cardId" component={Room} onEnter={isAuthorized} />
+        <Route path="/flash/decks/search" component={SearchTopic} onEnter={isAuthorized} />
         <Route path="/flash/decks/:deckId/study" component={StudyDeck} onEnter={isAuthorized} />
-
         <Route path="/classroom" component={Classroom} onEnter={isAuthorized} />
-
         <Route path="/classroom/room/:id" component={Room} onEnter={isAuthorized} />
-
         <Route path="/message" component={MessageApp} onEnter={isAuthorized} />
-
         <Route path="/create-account" component={CreateAccount} />
         <Route path="/sign-in" component={SignIn} />
         <Route path="/sign-out" component={SignOut} />
         <Route path="/profile" component={Profile} onEnter={isAuthorized} />
-
         <Route path="/canvas" component={Canvas} />
         
       </Route>

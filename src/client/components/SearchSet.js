@@ -12,7 +12,12 @@ export default class SearchSet extends React.Component {
     return (
       <div>
         <ul>
-          {this.props.topics.map((flashcard, index) => <SearchEntry key={index} flashcard={flashcard} selectedSet={this.props.selectedSet}/>)}
+          {this.props.topics.map((flashcard, index) => {
+            return (
+              <SearchEntry key={index} flashcard={flashcard} selectedSet={this.props.selectedSet}
+              />
+            );
+          })}
         </ul>
       </div>
     );

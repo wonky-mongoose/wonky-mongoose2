@@ -1,23 +1,32 @@
-// import React from 'react';
+import React from 'react';
+import SelectedSetEntry from './selectedSetEntry';
 
-// export default class SelectedSet extends React.Component {
-//   constructor(props) {
-//     super(props);
+export default class SelectedSet extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log('inside selectedSet', props)
+    this.state = {
+      selectedCards: []
+    }
+  }
 
-//     console.log('SelectCard', props);
-//   }
+  componentWillReceiveProps(nextProps) {
+    console.log('inside selectedCards componentWillReceiveProps', nextProps);
+    this.setState ({
+      selectedCards: nextProps.selectedCards
+    });
+  }
 
-//   componentDidMount() {
-//     this.props.selectCard(this.props.card._id);
-//     console.log('HERE IS MY ID FOR CARD', this.props.card._id)
-
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//        White Board Question: {this.props.card.question.text.slice(1,-1)}
-//       </div>
-//     );
-//   }
-// }
+  render() {
+    return (
+      <div>
+        <ul>
+          INSIDE SelectedSet
+          {this.state.selectedCards.map((card, index) =>
+            <SelectedSetEntry key={index} card={card} />
+          )}
+        </ul>
+      </div>
+    );
+  }
+}
