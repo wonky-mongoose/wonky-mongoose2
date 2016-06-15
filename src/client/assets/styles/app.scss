@@ -3,8 +3,209 @@
 @import "app/progress-bar";
 @import "app/flash-card";
 @import "app/splash";
+@import "app/canvas";
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css);
 
 html {
   font-family: Montserrat, Avenir, sans-serif;
+}
+
+.clickable-card {
+  cursor: pointer;
+}
+
+.no-side-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+#local-media, .remote-webcam {
+  margin-top: 20px;
+}
+
+video {
+  width: 100%;
+  box-shadow:0 12px 15px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+.message-card {
+  height: 60%;
+}
+
+
+.modal {
+  .emoji {
+    height: 50px;
+    width: 50px;
+  }
+}
+
+.profilepic {
+  .emoji {
+    height: 40px;
+    width: 40px;
+  } 
+  .face {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+  } 
+}
+
+li {
+  .profilepic {
+    img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      float: left;
+    }
+  }
+}
+
+
+div.message > div.text-wrapper {
+	border-radius: 2px;
+	font-weight: 300;
+	position: relative;
+	
+    
+    &:before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+ }
+
+.message {
+  .profilepic {
+    width: 50px;
+  }	
+} 
+
+
+.row {
+  .inputfield {
+    margin-top: 20px; 
+  }	
+}
+
+.row {
+  .card {
+    padding: 0 0;
+  }
+}
+
+.messenger {
+  .card-content {
+    padding: 0px 0 0px 0;
+  }
+}
+
+div.row {
+  div.message {
+    div.message-whitespace {
+      margin-top: 20px;
+    }
+  }
+}
+
+div.row {
+  div.message {
+    div.message-details {
+      &:after{
+        content: "";
+        display: table;
+        clear: both;
+      }
+    }
+  }
+}
+
+div.messagebody {
+  div.message {
+    div.messagetext {
+      width: initial;
+      margin-left: 10px;
+      margin-right: 10px;
+      padding: 5px;
+  	  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.02),0 2px 10px 0 rgba(0,0,0,0.02);
+  	  color: white;
+  	  margin-top: 1px;
+  	  margin-bottom: 0;
+  	  overflow-wrap: break-word;
+  	  word-wrap: break-word;
+  	  word-break: break-word;
+      img.emoji {
+        height: 30px;
+        width: 30px;
+      }
+    }
+  }
+}
+
+.cardbody {
+  .inputfield {
+    margin-bottom: 0;
+    background-color: white;
+    color: black;
+  }
+}
+
+.messenger {
+  .cardbody {
+    .card-content {
+      .cardbody {
+        .messagebody {
+	      height: 40vh;
+	      width: 100%;
+	      margin-bottom: 0px;
+	      overflow-y: scroll;
+        }
+      }
+    }
+  }
+}
+
+.nav-wrapper {
+  .contactsbtn {
+    margin-right: 10px;
+  }
+}
+
+.username {
+  .profilename {
+    padding-bottom: 30px;
+  }
+}
+
+.cardbody {
+  .no-margin {
+    margin-bottom: 0;
+  }
+}
+
+div.card-reveal{
+  ul.collection {
+    li#classmate {
+      min-height: 60px;
+      border-color: white;
+    }
+  }	
+}
+
+div.card-reveal{
+  ul#classmates {
+    border-color: white;
+  }	
+}
+
+.list-spacing:not(:first-child) {
+  margin-top: 25px;
+}
+
+.selectFlashcard {
+  margin-top: 10px;
 }

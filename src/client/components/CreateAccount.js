@@ -1,3 +1,4 @@
+/* global Materialize */
 import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
@@ -56,7 +57,7 @@ class CreateAccount extends React.Component {
       Auth.signIn(this.state.email, this.state.password)
         .then(user => {
           this.props.onSignIn(user);
-          browserHistory.push('/dashboard');
+          browserHistory.push('/');
         })
         .catch(this.handleError);
     })

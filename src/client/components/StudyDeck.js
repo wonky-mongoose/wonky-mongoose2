@@ -6,6 +6,7 @@ import { GREAT, OKAY, BAD } from '../constants/play';
 class StudyDeck extends React.Component {
   constructor(props) {
     super(props);
+    console.log('inside studyDeck', props);
     this.loadCard = this.loadCard.bind(this);
     this.handlePlay = this.handlePlay.bind(this);
   }
@@ -13,6 +14,7 @@ class StudyDeck extends React.Component {
   componentWillMount() {
     this.loadCard();
   }
+
 
   loadCard() {
     this.props.fetchCard(this.props.deck._id)
@@ -24,12 +26,15 @@ class StudyDeck extends React.Component {
       .then(() => this.loadCard());
   }
 
+  selectsCard() {
+    browserHistory.push(`/classroom/room/1465786194000/${this.props.card._id}`);
+  }
   showCardFront() {
     const { card: { question } } = this.props;
     return (
       <div className="flashcard flashcard-front">
         <div className="flashcard-close">
-          <i className="material-icons" onClick={() => browserHistory.push('/dashboard')}>close</i>
+          <i className="material-icons" onClick={() => browserHistory.push('/flash/dashboard')}>close</i>
         </div>
         <div className="flashcard-title">
           <ReactMarkdown source={(question && question.text) || ''} />
@@ -48,8 +53,9 @@ class StudyDeck extends React.Component {
     const { card: { answer }, play } = this.props;
     return (
       <div className="flashcard flashcard-back">
+        <button className="btn btn-small cyan lighten-3" onClick={this.selectsCard.bind(this)}>Select this flashcard</button>
         <div className="flashcard-close">
-          <i className="material-icons" onClick={() => browserHistory.push('/dashboard')}>close</i>
+          <i className="material-icons" onClick={() => browserHistory.push('/flash/dashboard')}>close</i>
         </div>
         <div className="flashcard-title">
           <ReactMarkdown source={(answer && answer.text) || ''} />
